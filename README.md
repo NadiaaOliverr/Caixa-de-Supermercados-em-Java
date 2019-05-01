@@ -1,14 +1,21 @@
 ## Caixa de Supermercados utilizando a linguagem Java
 
- [![](https://img.shields.io/github/contributors/NadiaOliver/Projeto-de-Estruturas-de-Dados---2018-2.svg)](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/graphs/contributors)
+ [![](https://img.shields.io/github/contributors/NadiaOliver/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/graphs/contributors)
+ [![](https://img.shields.io/github/languages/code-size/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)]() 
 
 Repositório em construção :fire:
 
-### Etapas implementadas
+### Etapas teóricas
 
-* [Descrição do Projeto](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20I) : Documentação referente ao escopo do projeto, englobando as funcionalidades que o sistema terá, linguagem de programação, classes e tabelas principais, bem como, o motivo que levou a optar por desenvolver tal software. 
- 
+* [Parte I](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20I) : Documentação referente ao escopo do projeto, englobando as funcionalidades que o sistema terá, linguagem de programação, classes e tabelas principais, bem como, o motivo que levou a optar por desenvolver tal software. 
 
+* [Parte II](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20II) : Parte I + documentação referente ao [RUP](https://pt.wikipedia.org/wiki/IBM_Rational_Unified_Process)(Processo de Software Unificado), abordando requisitos funcionais e não funcionais do sistema, bem como casos de uso e planejamento do desenvolvimento (Cronograma e detalhamento das atividades de implementação, incluindo a estimativa de tempo a ser gasto em cada Caso de Uso descrito na seção). 
+
+### Codificação
+
+### Manual do Usuário
+
+### Compilando o código
 
 ### Autores
 
