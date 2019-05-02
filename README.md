@@ -9,13 +9,15 @@ Repositório em construção :fire:
 
 * [Parte I](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20I) : Documentação referente ao escopo do projeto, englobando as funcionalidades que o sistema terá, linguagem de programação, classes e tabelas principais, bem como, o motivo que levou a optar por desenvolver tal software. 
 
-* [Parte II](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20II) : Parte I + documentação referente ao [RUP](https://pt.wikipedia.org/wiki/IBM_Rational_Unified_Process)(Processo de Software Unificado), abordando requisitos funcionais e não funcionais do sistema, bem como casos de uso e planejamento do desenvolvimento (Cronograma e detalhamento das atividades de implementação, incluindo a estimativa de tempo a ser gasto em cada Caso de Uso descrito na seção). 
+* [Parte II](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20II) : Parte I + documentação referente ao [RUP](https://pt.wikipedia.org/wiki/IBM_Rational_Unified_Process) (Processo de Software Unificado), abordando requisitos funcionais e não funcionais do sistema, bem como casos de uso e planejamento do desenvolvimento (Cronograma e detalhamento das atividades de implementação, incluindo a estimativa de tempo a ser gasto em cada Caso de Uso descrito na seção), além do código das classes. 
 
-### Codificação
+<!--### Codificação-->
 
 ### Manual do Usuário
 
-### Compilando o código
+* [Confira o desenvolvimento do nosso manual](https://drive.google.com/file/d/1btiL4ZuM5ms934ayJHmKSnjy_2aOCIoZ/view?usp=sharing)
+
+<!--### Compilando o código-->
 
 ### Autores
 
