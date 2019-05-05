@@ -11,6 +11,14 @@ public class Main {
             for(int i = 0; i < 50; i++)
             System.out.println("");
     }
+        public static void imprimeMenu(){
+        System.out.println("-- Menu do Usuário -- ");
+        System.out.println("1. Abrir Vendas.");
+        System.out.println("2. Ver seus dados cadastrais.");
+        /*System.out.println("3. Menu do Gerente.");*/
+        System.out.println("0. Sair do sistema.");
+        System.out.printf("Digite a opção desejada: ");
+    }
     
     public static void main(String[] args) throws InterruptedException {
         
@@ -21,7 +29,7 @@ public class Main {
         Scanner ler = new Scanner(System.in);
         String usuario;
         String senha;
-        int sim_ou_nao;
+        int resposta1;
         
         C1.setComprovante_de_renda("R$ 1000");
         C1.setComprovante_de_residencia("Rua Joao Mariano da Rocha");
@@ -64,27 +72,28 @@ public class Main {
         {
             cls();
             System.out.println("Bem vindo ao sistema!");
-           
-            System.out.println("Deseja ver seus dados cadastrais?");
-            sim_ou_nao = ler.nextInt();
-            
-            
-            if(sim_ou_nao==1)
-            {
-                cls();
-                F1.VerDadosCadastrais();
-            }else
-            {
-                cls();
-                System.out.println("CAIXA ABERTO!");
-                System.out.println("Cliente passando produtos....");
-                C1.RealizarPagamento();
-                System.out.println("Obrigado por utilizar o sistema!");
-            }
-            
-        }else{
-            System.out.println("Usuário ou senha incorretos.");
-        }
-        
+            imprimeMenu();
+            resposta1 = ler.nextInt();
+            do{
+                switch(resposta1){
+                    case 1:
+                        cls();
+                        System.out.println("CAIXA ABERTO!");
+                        System.out.println("Cliente passando produtos....");
+                        C1.RealizarPagamento();
+                        System.out.println("Obrigado por utilizar o sistema!");
+                        break;
+                    case 2:
+                        cls();
+                        F1.VerDadosCadastrais();
+                        break;
+                    case 0:
+                        cls();
+                        System.out.println("Saindo do Sistema...");
+                        Thread.sleep(2000);
+                        break;
+                }
+            }while(resposta1 != 0);
+        }        
     }
 }
