@@ -29,7 +29,7 @@ public class Main {
         Scanner ler = new Scanner(System.in);
         String usuario;
         String senha;
-        int resposta1;
+        int resposta1, resposta2, meta = 0;
         
         C1.setComprovante_de_renda("R$ 1000");
         C1.setComprovante_de_residencia("Rua Joao Mariano da Rocha");
@@ -70,22 +70,29 @@ public class Main {
         
         if(F1.FazerLogin()==true)
         {
-            cls();
-            System.out.println("Bem vindo ao sistema!");
-            imprimeMenu();
-            resposta1 = ler.nextInt();
             do{
+                cls();
+                System.out.println("Bem vindo ao sistema!");
+                imprimeMenu();
+                resposta1 = ler.nextInt();
                 switch(resposta1){
                     case 1:
-                        cls();
-                        System.out.println("CAIXA ABERTO!");
-                        System.out.println("Cliente passando produtos....");
-                        C1.RealizarPagamento();
-                        System.out.println("Obrigado por utilizar o sistema!");
+                        for(meta = 0; meta < 2; meta++){//Meta representa meta de vendas diaria
+                            cls();
+                            System.out.println("CAIXA ABERTO!");
+                            System.out.println("Cliente passando produtos....");
+                            C1.RealizarPagamento();
+                            System.out.println("Obrigado por utilizar o sistema!");
+                            Thread.sleep(5000);
+                        }
                         break;
                     case 2:
-                        cls();
-                        F1.VerDadosCadastrais();
+                        do{
+                            cls();
+                            F1.VerDadosCadastrais();
+                            System.out.println("Deseja voltar ao menu anterior? (1 - SIM/0 - NÃO)");
+                            resposta2 = ler.nextInt();
+                        }while(resposta2 != 1);
                         break;
                     case 0:
                         cls();
