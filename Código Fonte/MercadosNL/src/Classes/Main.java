@@ -22,7 +22,7 @@ public class Main {
         
     public static double passarCompras() throws InterruptedException{
         Scanner ler = new Scanner(System.in);
-        int resposta3 = 0;
+        int resposta3;
         int quantidade;
         double total = 0;
         do{
@@ -41,19 +41,19 @@ public class Main {
                     System.out.println("Miojo Nissin - R$1,50");
                     System.out.printf("Quantidade: ");
                     quantidade = ler.nextInt();
-                    total += quantidade*1.50;
+                    total += 1.50*quantidade;
                     break;
                 case 3889:
                     System.out.println("Batata Pif-Paf - R$5,00");
                     System.out.println("Quantidade: ");
                     quantidade = ler.nextInt();
-                    total += quantidade*5.00;
+                    total += 5.00*quantidade;
                     break;
                 case 2676:
                     System.out.println("Biscoito Maria - R$2,00");
                     System.out.println("Quantidade: ");
                     quantidade = ler.nextInt();
-                    total += quantidade*2.00;
+                    total += 2.00*quantidade;
                     break;
                 case 6237:
                     System.out.println("Sabonete Lux - R$1,00");
@@ -138,7 +138,7 @@ public class Main {
                         total = passarCompras();
                         cls();
                         System.out.println("Total a Pagar: R$" + total);
-                        C1.RealizarPagamento();
+                        C1.RealizarPagamento(total);
                         System.out.println("Obrigado por utilizar o sistema!");
                         Thread.sleep(5000);
                         break;
