@@ -12,7 +12,7 @@ public class Main {
             System.out.println("");
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         
         Funcionario F1 = new Funcionario();
         Endereco EndF1 = new Endereco();
@@ -44,14 +44,21 @@ public class Main {
         F1.setSenha_cadastrada("45678");
         
         
-        System.out.println("Bem vindo ao TEC VENDAS");
-        System.out.println("Usuário: ");
-        usuario = ler.nextLine();
-        F1.setNomeUser(usuario);
+        do{
+            cls();
+            System.out.println("Bem vindo ao TEC VENDAS");
+            System.out.println("Usuário: ");
+            usuario = ler.nextLine();
+            F1.setNomeUser(usuario);
         
-        System.out.println("Senha: ");
-        senha = ler.nextLine();
-        F1.setSenha(senha);
+            System.out.println("Senha: ");
+            senha = ler.nextLine();
+            F1.setSenha(senha);
+            if(F1.FazerLogin()==false){
+                System.out.println("Usuário invalido! Digite Novamente.");
+                Thread.sleep(2000);
+            }
+        }while(F1.FazerLogin()==false);
         
         if(F1.FazerLogin()==true)
         {
