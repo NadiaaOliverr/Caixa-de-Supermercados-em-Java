@@ -1,4 +1,5 @@
 package Classes;
+import java.io.IOException;
 import java.util.Scanner;
 /**
  *
@@ -11,16 +12,68 @@ public class Main {
             for(int i = 0; i < 50; i++)
             System.out.println("");
     }
-        public static void imprimeMenu(){
+    public static void imprimeMenu(){
         System.out.println("-- Menu do Usuário -- ");
         System.out.println("1. Abrir Vendas.");
         System.out.println("2. Ver seus dados cadastrais.");
-        /*System.out.println("3. Menu do Gerente.");*/
         System.out.println("0. Sair do sistema.");
         System.out.printf("Digite a opção desejada: ");
     }
+        
+    public static double passarCompras() throws InterruptedException{
+        Scanner ler = new Scanner(System.in);
+        int resposta3 = 0;
+        int quantidade;
+        double total = 0;
+        do{
+            cls();
+            System.out.println("Para Encerrar a compra digite 0;");
+            System.out.println("Digite o codigo de Barras do Produto: ");
+            resposta3 = ler.nextInt();
+            switch(resposta3){
+                case 8533:
+                    System.out.println("Coca-cola - R$5,00");
+                    System.out.printf("Quantidade: ");
+                    quantidade = ler.nextInt();
+                    total += 5.00*quantidade;
+                    break;
+                case 1845:
+                    System.out.println("Miojo Nissin - R$1,50");
+                    System.out.printf("Quantidade: ");
+                    quantidade = ler.nextInt();
+                    total += quantidade*1.50;
+                    break;
+                case 3889:
+                    System.out.println("Batata Pif-Paf - R$5,00");
+                    System.out.println("Quantidade: ");
+                    quantidade = ler.nextInt();
+                    total += quantidade*5.00;
+                    break;
+                case 2676:
+                    System.out.println("Biscoito Maria - R$2,00");
+                    System.out.println("Quantidade: ");
+                    quantidade = ler.nextInt();
+                    total += quantidade*2.00;
+                    break;
+                case 6237:
+                    System.out.println("Sabonete Lux - R$1,00");
+                    System.out.println("Quantidade: ");
+                    quantidade = ler.nextInt();
+                    total += quantidade*1.00;
+                    break;
+                case 0:
+                    System.out.println("Fechando a Compra...");
+                    Thread.sleep(2000);
+                    break;
+                default:
+                    System.out.println("CODIGO DE PRODUTO INVALIDO!");
+                    Thread.sleep(2000);
+            }
+        }while(resposta3 != 0);
+        return total;
+    }
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException{
         
         Funcionario F1 = new Funcionario();
         Endereco EndF1 = new Endereco();
@@ -29,7 +82,8 @@ public class Main {
         Scanner ler = new Scanner(System.in);
         String usuario;
         String senha;
-        int resposta1, resposta2, meta = 0;
+        int resposta1, resposta2;
+        double total = 0.0;
         
         C1.setComprovante_de_renda("R$ 1000");
         C1.setComprovante_de_residencia("Rua Joao Mariano da Rocha");
@@ -47,9 +101,9 @@ public class Main {
         F1.setNcarteiratrabalho("MG-18456789");
         F1.setIdade(20);
         F1.setSexo("Masculino");
-        F1.setNome("José Augusto");
-        F1.setUsuario_cadastrado("JoseSilva");
-        F1.setSenha_cadastrada("45678");
+        F1.setNome("Joao Batista");
+        F1.setUsuario_cadastrado("JoaoBatista");
+        F1.setSenha_cadastrada("516281");
         
         
         do{
@@ -77,14 +131,16 @@ public class Main {
                 resposta1 = ler.nextInt();
                 switch(resposta1){
                     case 1:
-                        for(meta = 0; meta < 2; meta++){//Meta representa meta de vendas diaria
-                            cls();
-                            System.out.println("CAIXA ABERTO!");
-                            System.out.println("Cliente passando produtos....");
-                            C1.RealizarPagamento();
-                            System.out.println("Obrigado por utilizar o sistema!");
-                            Thread.sleep(5000);
-                        }
+                        cls();
+                        System.out.println("CAIXA ABERTO!");
+                        System.out.println("Cliente passando produtos....");
+                        Thread.sleep(4000);
+                        total = passarCompras();
+                        cls();
+                        System.out.println("Total a Pagar: R$" + total);
+                        C1.RealizarPagamento();
+                        System.out.println("Obrigado por utilizar o sistema!");
+                        Thread.sleep(5000);
                         break;
                     case 2:
                         do{
@@ -99,6 +155,8 @@ public class Main {
                         System.out.println("Saindo do Sistema...");
                         Thread.sleep(2000);
                         break;
+                    default:
+                        System.out.println("OPÇÃO INVALIDA!");
                 }
             }while(resposta1 != 0);
         }        
