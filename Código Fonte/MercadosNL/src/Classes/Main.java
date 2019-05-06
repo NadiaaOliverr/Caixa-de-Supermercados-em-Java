@@ -117,7 +117,7 @@ public class Main {
             senha = ler.nextLine();
             F1.setSenha(senha);
             if(F1.FazerLogin()==false){
-                System.out.println("Usuário invalido! Digite Novamente.");
+                System.out.println("Usuário ou senha invalido! Digite Novamente.");
                 Thread.sleep(2000);
             }
         }while(F1.FazerLogin()==false);
