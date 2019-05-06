@@ -1,7 +1,7 @@
-<!---## Caixa de Supermercados utilizando a linguagem Java
+<!---## Caixa de Supermercados utilizando a linguagem Java -->
 
-<!-- [![](https://img.shields.io/github/contributors/NadiaOliver/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/graphs/contributors)
- [![](https://img.shields.io/github/languages/code-size/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)]() -->
+ [![](https://img.shields.io/github/contributors/NadiaOliver/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/graphs/contributors)
+ [![](https://img.shields.io/github/languages/code-size/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)]() 
 
 Repositório em construção :fire:
 
