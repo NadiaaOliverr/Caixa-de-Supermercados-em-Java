@@ -43,7 +43,7 @@ Caso opte, assista a este [vídeo](https://youtu.be/NdrqRyoEUiA) de preparação
 * Execute com o comando <code>Shift+F6</code>
 ### Manual do Usuário
 
-* [Confira o nosso manual](https://drive.google.com/file/d/1btiL4ZuM5ms934ayJHmKSnjy_2aOCIoZ/view?usp=sharing)
+* [Confira o nosso manual](https://drive.google.com/file/d/1ehpWXBqXO85rbsrklw6egKbyAS8bI0bz/view?usp=sharing)
 
 <!--### Compilando o código-->
 
