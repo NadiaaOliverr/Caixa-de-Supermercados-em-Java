@@ -89,9 +89,9 @@ public class TelaInicial extends javax.swing.JFrame {
     //Botão de Usuários no painel principal
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         
-        TelaCadastroUsuarios user = null;
+        TelaCadastroProduto user = null;
         try {
-            user = new TelaCadastroUsuarios();
+            user = new TelaCadastroProduto();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
