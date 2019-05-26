@@ -11,7 +11,9 @@ public class Funcionario extends Pessoa {
     private String nome_user; //Torna uma constante
     private String senha;
     private String ncarteiratrabalho;
-    
+    private date HoraDeEntrada;
+    private date HoraDeSaida;
+
     
     //Construtor padrão
     public Funcionario()
@@ -25,7 +27,7 @@ public class Funcionario extends Pessoa {
 
     //Construtor
     public Funcionario(String usuario_cadastrado, String senha_cadastrada, String nome_user, String senha, String ncarteiratrabalho, String nome, String sexo, int idade, String identidade, int cpf, Endereco end) {
-        super(nome, sexo, idade, identidade, cpf, end);
+        super(nome, sexo, identidade, cpf, end);
         this.usuario_cadastrado = usuario_cadastrado;
         this.senha_cadastrada = senha_cadastrada;
         this.nome_user = nome_user;
@@ -53,6 +55,19 @@ public class Funcionario extends Pessoa {
     public String getNcarteiratrabalho() {
         return ncarteiratrabalho;
     }
+    
+    public String getNome_user() {
+        return nome_user;
+    }
+
+    public date getHoraDeEntrada() {
+        return HoraDeEntrada;
+    }
+
+    public date getHoraDeSaida() {
+        return HoraDeSaida;
+    }
+
 
     //Sets
     public void setUsuario_cadastrado(String usuario_cadastrado) {
@@ -75,18 +90,30 @@ public class Funcionario extends Pessoa {
         this.ncarteiratrabalho = ncarteiratrabalho;
     }
   
-   public boolean FazerLogin()
-   {
+    public boolean FazerLogin1()
+    {
        return this.usuario_cadastrado.equals(this.nome_user) && this.senha_cadastrada.equals(this.senha);
-   }
+    }
    
+    public void setHoraDeSaida(date HoraDeSaida) {
+        this.HoraDeSaida = HoraDeSaida;
+    }
+   
+   
+    public void setNome_user(String nome_user) {
+        this.nome_user = nome_user;
+    }
+    
+    public void setHoraDeEntrada(date HoraDeEntrada) {
+        this.HoraDeEntrada = HoraDeEntrada;
+    }
+
    //Métodos de ver dados cadastrais
    public void VerDadosCadastrais()
    {
        System.out.println("---------------------------------------");
        System.out.println("Nome do funcionário: " + super.getNome());
        System.out.println("Sexo: " + super.getSexo());
-       System.out.println("Idade: " + super.getIdade());
        System.out.println("Carteira de Identidade: " + super.getIdentidade());
        System.out.println("CPF: " + super.getCpf());
        System.out.println("Rua: " + super.getEnd().getRua());

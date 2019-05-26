@@ -13,7 +13,6 @@ public class Pessoa {
     
     protected String nome;
     protected String sexo;
-    protected int idade;
     protected String identidade;
     protected int cpf;
     Endereco end = new Endereco();
@@ -25,10 +24,9 @@ public class Pessoa {
    }
     
     //Construtor
-    public Pessoa(String nome, String sexo, int idade, String identidade, int cpf, Endereco end) {
+    public Pessoa(String nome, String sexo, String identidade, int cpf, Endereco end) {
         this.nome = nome;
         this.sexo = sexo;
-        this.idade = idade;
         this.identidade = identidade;
         this.cpf = cpf;
         this.end = end;
@@ -41,10 +39,6 @@ public class Pessoa {
 
     public String getSexo() {
         return sexo;
-    }
-
-    public int getIdade() {
-        return idade;
     }
 
     public String getIdentidade() {
@@ -68,9 +62,6 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
 
     public void setIdentidade(String identidade) {
         this.identidade = identidade;

@@ -99,7 +99,6 @@ public class Main {
         F1.setEnd(EndF1);
         F1.setCpf(123456789);
         F1.setNcarteiratrabalho("MG-18456789");
-        F1.setIdade(20);
         F1.setSexo("Masculino");
         F1.setNome("Joao Batista");
         F1.setUsuario_cadastrado("JoaoBatista");
@@ -116,13 +115,13 @@ public class Main {
             System.out.println("Senha: ");
             senha = ler.nextLine();
             F1.setSenha(senha);
-            if(F1.FazerLogin()==false){
+            if(F1.FazerLogin1()==false){
                 System.out.println("Usuário ou senha invalido! Digite Novamente.");
                 Thread.sleep(2000);
             }
-        }while(F1.FazerLogin()==false);
+        }while(F1.FazerLogin1()==false);
         
-        if(F1.FazerLogin()==true)
+        if(F1.FazerLogin1()==true)
         {
             do{
                 cls();
