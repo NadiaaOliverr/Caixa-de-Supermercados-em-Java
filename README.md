@@ -1,10 +1,10 @@
 <!---## Caixa de Supermercados utilizando a linguagem Java -->
 
- [![](https://img.shields.io/github/contributors/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/graphs/contributors)  [![](https://img.shields.io/github/languages/code-size/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)]() 
+<!-- [![](https://img.shields.io/github/contributors/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/graphs/contributors)  [![](https://img.shields.io/github/languages/code-size/NadiaOliver/Caixa-de-Supermercados-em-Java.svg)]() -->
 
 
 
-Repositório em construção :fire:
+<!--Repositório em construção :fire:-->
 
 <h1 align="center"><a id="user-content-fórum-da-turma-do-curso-do-front-ao-end" class="anchor" aria-hidden="true" href="#fórum-da-turma-do-curso-do-front-ao-end"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"></svg></a>Tec Vendas</h1>
 <p align="center"></p>
@@ -31,16 +31,15 @@ Repositório em construção :fire:
 
 ### Dependências do Projeto
 
-* Sugere-se o uso do [Netbeans](https://netbeans.org/) 
-* [JDK 8](https://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
+* Sugere-se o uso do [Netbeans](https://netbeans.org/) como IDE de compilação do projeto.
 
-Caso opte, assista a este [vídeo](https://youtu.be/NdrqRyoEUiA) de preparação do ambiente.
+* Para esta aplicação, foi utilizado o SGBD [Postresql](https://www.postgresql.org/download/) 
 
 ### Quer compilar o projeto?
 * Clone o repositório com <code>git clone git@github.com:NadiaOliver/Caixa-de-Supermercados-em-Java.git</code>
 * Abra a IDE 
 * Importe o projeto que estará na pasta <code>src</code>
-* Execute com o comando <code>Shift+F6</code>
+* Execute a aplicação com o comando <code>Shift+F6</code>
 ### Manual do Usuário
 
 * [Confira o nosso manual](https://drive.google.com/file/d/1ehpWXBqXO85rbsrklw6egKbyAS8bI0bz/view?usp=sharing)
