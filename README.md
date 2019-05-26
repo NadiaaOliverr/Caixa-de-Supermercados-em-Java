@@ -11,11 +11,11 @@
 <blockquote>
 <p><strong></strong> <em>Software responsável pelo gerenciamento do fluxo de caixa no contexto de um supermercado utilizando a linguagem de programação Java.</em></p>
 </blockquote>
-<hr>
+<!--<hr>
 <p align="center">
   <a href="https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/issues">Nos deixe uma issue</a>
 </p>
-<hr>
+<hr>-->
 
 ### Documentação
 
@@ -25,9 +25,9 @@
 
 * [Parte II](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20II) : Parte I + documentação referente ao [RUP](https://pt.wikipedia.org/wiki/IBM_Rational_Unified_Process) (Processo de Software Unificado), abordando requisitos funcionais e não funcionais do sistema, bem como casos de uso e planejamento do desenvolvimento (Cronograma e detalhamento das atividades de implementação, incluindo a estimativa de tempo a ser gasto em cada Caso de Uso descrito), além do código das classes. -->
 
-### Codificação
+<!--### Codificação
 
-* [Código Fonte](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/C%C3%B3digo%20Fonte/MercadosNL/src/Classes)
+* [Código Fonte](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/C%C3%B3digo%20Fonte/MercadosNL/src/Classes)-->
 
 ### Dependências do Projeto
 
@@ -39,10 +39,11 @@
 * Clone o repositório com <code>git clone git@github.com:NadiaOliver/Caixa-de-Supermercados-em-Java.git</code>
 * Abra a IDE 
 * Importe o projeto que estará na pasta <code>src</code>
+* Vá até o arquivo <code>ConectaBanco.java</code>, que se encontra na pasta src->DAO e modifique a conexão com seus dados de usuário e senha do banco.
 * Execute a aplicação com o comando <code>Shift+F6</code>
 ### Manual do Usuário
 
-* [Confira o nosso manual](https://drive.google.com/file/d/1ehpWXBqXO85rbsrklw6egKbyAS8bI0bz/view?usp=sharing)
+* [Confira o manual de utilização do TecVendas](https://drive.google.com/file/d/1ehpWXBqXO85rbsrklw6egKbyAS8bI0bz/view?usp=sharing)
 
 <!--### Compilando o código-->
 
@@ -51,14 +52,9 @@
 [<img src="https://avatars0.githubusercontent.com/u/41811634?s=460&v=4" width="100px;"/><br/><sub><b>Nádia Oliveira</b></sub>](https://github.com/NadiaOliver)<br /> |[<img src="https://avatars3.githubusercontent.com/u/43919313?s=460&v=4" width="100px;"/><br /><sub><b>Luigi Miranda</b></sub>](https://github.com/LuigiKerb)<br />
 --------- | ------
 
-## Licença
 
 
-Este projeto possui a licença <a href="https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/blob/master/LICENSE" target="_blank">MIT</a>
-
-
-
-Copyright © 2019.
+Este projeto possui a licença <a href="https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/blob/master/LICENSE" target="_blank">MIT</a> - Copyright © 2019.
 
 
  
