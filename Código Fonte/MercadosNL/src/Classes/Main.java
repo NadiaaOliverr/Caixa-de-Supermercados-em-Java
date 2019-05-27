@@ -79,6 +79,7 @@ public class Main {
         Endereco EndF1 = new Endereco();
         Cliente C1 = new Cliente();
         
+        
         Scanner ler = new Scanner(System.in);
         String usuario;
         String senha;

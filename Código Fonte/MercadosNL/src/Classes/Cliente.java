@@ -2,7 +2,7 @@ package Classes;
 import java.util.Scanner;
 /**
  *
- * @author nadia
+ * @author nadia e luigi
  */
 public class Cliente extends Pessoa {
 
