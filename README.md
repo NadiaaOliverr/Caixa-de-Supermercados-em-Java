@@ -19,7 +19,7 @@
 
 ### Documentação
 
-* [Descrição do Projeto](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/blob/master/Detalhamento%20do%20Projeto%20-%20Entrega%20II/Descri%C3%A7%C3%A3o.pdf)
+* [Descrição do Projeto](https://drive.google.com/file/d/1dp-8nUxPN7gFhAk1gVbrXgrA-Ns_fe2d/view?usp=sharing)
 
 <!--* [Parte I](https://github.com/NadiaOliver/Caixa-de-Supermercados-em-Java/tree/master/Detalhamento%20do%20Projeto%20-%20Entrega%20I) : Documentação referente ao escopo do projeto, englobando as funcionalidades que o sistema terá, linguagem de programação, classes e tabelas principais, bem como, o motivo que levou a optar por desenvolver tal software. 
 
