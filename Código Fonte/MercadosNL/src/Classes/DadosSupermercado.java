@@ -2,12 +2,58 @@ package Classes;
 
 public class DadosSupermercado {
 
-	private int cnpj;
+    private int cnpj;
+    private Endereco endereco;
+    private int telefone;
+    private Nota nota_fiscal;
+        
+    //Construtor
 
-	private Endereco endereco;
+    public DadosSupermercado(int cnpj, Endereco endereco, int telefone) {
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }
+    
+    
+    //Get
+    public int getCnpj() {
+        return cnpj;
+    }
 
-	private int telefone;
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-	private Nota nota_fiscal;
+    public int getTelefone() {
+        return telefone;
+    }
+
+    public Nota getNota_fiscal() {
+        return nota_fiscal;
+    }
+    
+    //Set
+    public void setCnpj(int cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setNota_fiscal(Nota nota_fiscal) {
+        this.nota_fiscal = nota_fiscal;
+    }
+    //Metodo
+
+    
+
+    
+        
 
 }
