@@ -1,6 +1,6 @@
 package Classes;
 
-public class Nota extends Gerente {
+public class NotaFiscal{
 
     private String codigoNotaFiscal;
     private date data;
@@ -23,7 +23,7 @@ public class Nota extends Gerente {
     }
         
     public void formaDePagamento(){
-            
+        
     }
 
 }

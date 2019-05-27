@@ -5,7 +5,7 @@ public class DadosSupermercado {
     private int cnpj;
     private Endereco endereco;
     private int telefone;
-    private Nota nota_fiscal;
+    private NotaFiscal nota_fiscal;
         
     //Construtor
 
@@ -29,7 +29,7 @@ public class DadosSupermercado {
         return telefone;
     }
 
-    public Nota getNota_fiscal() {
+    public NotaFiscal getNota_fiscal() {
         return nota_fiscal;
     }
     
@@ -46,14 +46,9 @@ public class DadosSupermercado {
         this.telefone = telefone;
     }
 
-    public void setNota_fiscal(Nota nota_fiscal) {
+    public void setNota_fiscal(NotaFiscal nota_fiscal) {
         this.nota_fiscal = nota_fiscal;
     }
     //Metodo
-
-    
-
-    
-        
 
 }

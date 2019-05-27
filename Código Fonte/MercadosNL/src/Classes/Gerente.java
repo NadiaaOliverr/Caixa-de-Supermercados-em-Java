@@ -24,6 +24,10 @@ public class Gerente extends Funcionario implements Autenticavel {
 	public void CadastrarProduto() {
 
 	}
+        
+        public void CadastrarFuncionario(){
+            
+        }
 
 
 	/**

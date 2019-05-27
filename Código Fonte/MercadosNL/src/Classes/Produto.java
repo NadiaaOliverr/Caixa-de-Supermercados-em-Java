@@ -46,15 +46,21 @@ public class Produto {
 
     //Set
     public void setCodigoDeBarras(String codigoDeBarras) {
-        this.codigoDeBarras = codigoDeBarras;
+        if(codigoDeBarras != " "){
+            this.codigoDeBarras = codigoDeBarras;  
+        }
     }
 
     public void setPreco(double preco) {
-        this.preco = preco;
+        if(preco > 0.0f){
+            this.preco = preco;
+        }
     }
 
     public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+        if(quantidade > 0){
+            this.quantidade = quantidade;
+        }
     }
 
     public void setMarca(String marca) {
