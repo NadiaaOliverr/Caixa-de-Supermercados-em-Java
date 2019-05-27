@@ -2,9 +2,8 @@ package Classes;
 
 public class Gerente extends Funcionario implements Autenticavel {
 
-	private String relatorio;
-
-	private double retirada;
+	protected String relatorio;
+	protected double retirada;
 
 	public void CancelamentoProduto() {
 
