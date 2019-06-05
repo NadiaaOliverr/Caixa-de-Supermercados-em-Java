@@ -108,7 +108,7 @@ public class Funcionario extends Pessoa {
         this.HoraDeEntrada = HoraDeEntrada;
     }
 
-   //Métodos de ver dados cadastrais
+   //Métodos
    public void VerDadosCadastrais()
    {
        System.out.println("---------------------------------------");
@@ -123,6 +123,9 @@ public class Funcionario extends Pessoa {
        System.out.println("Bairro: " + super.getEnd().getBairro());
        System.out.println("------------------------------------------");
    }
-   //Alterar dados cadastrais
+   
+   public void PesquisarProdutos(){
+       
+   }
     
 }
