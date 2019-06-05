@@ -1,4 +1,4 @@
-package MercadosNL;
+package Classes;
 
 public class Login {
 

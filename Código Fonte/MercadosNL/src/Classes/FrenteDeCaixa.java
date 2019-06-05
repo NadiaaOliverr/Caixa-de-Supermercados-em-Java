@@ -9,8 +9,8 @@ public class FrenteDeCaixa extends Funcionario implements Autenticavel {
 	 * @see MercadosNL.Autenticavel#FazerLogin()
 	 */
         @Override
-	public void FazerLogin() {
-            System.out.println("oi");
+	public void FazerLogin(){
+            
 	}
 
 }
