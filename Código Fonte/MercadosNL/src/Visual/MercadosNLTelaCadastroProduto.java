@@ -17,6 +17,13 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
     public MercadosNLTelaCadastroProduto() {
         initComponents();
     }
+    public void limparCampos(){
+        BarraCodigo.setText("");
+        BarraNomeP.setText("");
+        BarraPreco.setText("");
+        BarraMarca.setText("");
+        BarraCodigoDeBarras.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,31 +37,31 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        TabelaProdutos = new javax.swing.JTable();
+        ButtonCadastrasr = new javax.swing.JButton();
+        ButtonEditar = new javax.swing.JButton();
+        ButtonExcluir = new javax.swing.JButton();
+        ButtonLimpar = new javax.swing.JButton();
+        ButtonCancelar = new javax.swing.JButton();
+        ButtonBuscar = new javax.swing.JButton();
+        BarraBuscar = new javax.swing.JTextField();
+        BarraCodigo = new javax.swing.JTextField();
+        BarraMarca = new javax.swing.JTextField();
+        BarraNomeP = new javax.swing.JTextField();
+        BarraCodigoDeBarras = new javax.swing.JTextField();
+        BarraPreco = new javax.swing.JTextField();
+        LabelCodigo = new javax.swing.JLabel();
+        LabelNomeP = new javax.swing.JLabel();
+        LabelCodigoDeBarras = new javax.swing.JLabel();
+        LabelMarca = new javax.swing.JLabel();
+        LabelPreco = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -119,54 +126,66 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(TabelaProdutos);
 
-        jButton1.setText("Cadastrar");
-        jButton1.setMaximumSize(new java.awt.Dimension(105, 23));
-        jButton1.setMinimumSize(new java.awt.Dimension(105, 23));
-        jButton1.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonCadastrasr.setText("Cadastrar");
+        ButtonCadastrasr.setMaximumSize(new java.awt.Dimension(105, 23));
+        ButtonCadastrasr.setMinimumSize(new java.awt.Dimension(105, 23));
+        ButtonCadastrasr.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        jButton2.setText("Editar");
-        jButton2.setMaximumSize(new java.awt.Dimension(105, 23));
-        jButton2.setMinimumSize(new java.awt.Dimension(105, 23));
-        jButton2.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonEditar.setText("Editar");
+        ButtonEditar.setMaximumSize(new java.awt.Dimension(105, 23));
+        ButtonEditar.setMinimumSize(new java.awt.Dimension(105, 23));
+        ButtonEditar.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        jButton3.setText("Excluir");
-        jButton3.setMaximumSize(new java.awt.Dimension(105, 23));
-        jButton3.setMinimumSize(new java.awt.Dimension(105, 23));
-        jButton3.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonExcluir.setText("Excluir");
+        ButtonExcluir.setMaximumSize(new java.awt.Dimension(105, 23));
+        ButtonExcluir.setMinimumSize(new java.awt.Dimension(105, 23));
+        ButtonExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        jButton4.setText("Limpar Campos");
-
-        jButton5.setText("Cancelar");
-        jButton5.setMaximumSize(new java.awt.Dimension(105, 23));
-        jButton5.setMinimumSize(new java.awt.Dimension(105, 23));
-        jButton5.setPreferredSize(new java.awt.Dimension(105, 23));
-
-        jButton6.setText("Buscar");
-
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        ButtonLimpar.setText("Limpar Campos");
+        ButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                ButtonLimparActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setText("Código");
+        ButtonCancelar.setText("Cancelar");
+        ButtonCancelar.setMaximumSize(new java.awt.Dimension(105, 23));
+        ButtonCancelar.setMinimumSize(new java.awt.Dimension(105, 23));
+        ButtonCancelar.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel2.setText("Nome");
+        ButtonBuscar.setText("Buscar");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel3.setText("Código de Barras");
+        BarraBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        BarraBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BarraBuscarActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel4.setText("Marca");
+        BarraCodigo.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel5.setText("Preço");
+        BarraCodigoDeBarras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BarraCodigoDeBarrasActionPerformed(evt);
+            }
+        });
+
+        LabelCodigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LabelCodigo.setText("Código");
+
+        LabelNomeP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LabelNomeP.setText("Nome");
+
+        LabelCodigoDeBarras.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LabelCodigoDeBarras.setText("Código de Barras");
+
+        LabelMarca.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LabelMarca.setText("Marca");
+
+        LabelPreco.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LabelPreco.setText("Preço");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,40 +195,40 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonCadastrasr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(ButtonLimpar)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(BarraBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6))
+                        .addComponent(ButtonBuscar))
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(LabelCodigo)
+                            .addComponent(LabelNomeP)
+                            .addComponent(LabelCodigoDeBarras))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField2))
+                                    .addComponent(BarraNomeP)
+                                    .addComponent(BarraCodigo))
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                    .addComponent(LabelMarca)
+                                    .addComponent(LabelPreco))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField7)))
-                            .addComponent(jTextField5))))
+                                    .addComponent(BarraMarca)
+                                    .addComponent(BarraPreco)))
+                            .addComponent(BarraCodigoDeBarras))))
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,34 +236,34 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(BarraBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonBuscar))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(BarraCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelCodigo)
+                    .addComponent(BarraMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelMarca))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BarraNomeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelPreco))
+                    .addComponent(LabelNomeP)
+                    .addComponent(BarraPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelCodigoDeBarras)
+                    .addComponent(BarraCodigoDeBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButtonCadastrasr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonLimpar)
+                    .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
@@ -268,9 +287,18 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void BarraCodigoDeBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarraCodigoDeBarrasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_BarraCodigoDeBarrasActionPerformed
+
+    private void BarraBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarraBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BarraBuscarActionPerformed
+
+    private void ButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLimparActionPerformed
+        limparCampos();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,26 +336,26 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField BarraBuscar;
+    private javax.swing.JTextField BarraCodigo;
+    private javax.swing.JTextField BarraCodigoDeBarras;
+    private javax.swing.JTextField BarraMarca;
+    private javax.swing.JTextField BarraNomeP;
+    private javax.swing.JTextField BarraPreco;
+    private javax.swing.JButton ButtonBuscar;
+    private javax.swing.JButton ButtonCadastrasr;
+    private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JButton ButtonEditar;
+    private javax.swing.JButton ButtonExcluir;
+    private javax.swing.JButton ButtonLimpar;
+    private javax.swing.JLabel LabelCodigo;
+    private javax.swing.JLabel LabelCodigoDeBarras;
+    private javax.swing.JLabel LabelMarca;
+    private javax.swing.JLabel LabelNomeP;
+    private javax.swing.JLabel LabelPreco;
+    private javax.swing.JTable TabelaProdutos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,7 +17,13 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
     public MercadosNLTelaCadastroFunc() {
         initComponents();
     }
-
+    public void limparCampos(){
+        BarraNome.setText("");
+        BarraCargo.setText("");
+        BarraCPF.setText("");
+        BarraUsuario.setText("");
+        BarraSenha.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +80,11 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         ButtonExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
 
         ButtonLimpar.setText("Limpar Campos");
+        ButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonLimparActionPerformed(evt);
+            }
+        });
 
         ButtonCancelar.setText("Cancelar");
         ButtonCancelar.setMaximumSize(new java.awt.Dimension(105, 23));
@@ -256,6 +267,11 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
     private void ButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonBuscarActionPerformed
+
+    private void ButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLimparActionPerformed
+        limparCampos();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments
