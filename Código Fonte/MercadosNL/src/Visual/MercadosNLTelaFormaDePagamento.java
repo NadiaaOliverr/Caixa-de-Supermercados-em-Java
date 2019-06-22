@@ -41,7 +41,7 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBackground(new java.awt.Color(0, 155, 155));
+        jPanel1.setBackground(new java.awt.Color(53, 53, 57));
         jPanel1.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 30)); // NOI18N
@@ -105,7 +105,7 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 155, 155));
+        jPanel3.setBackground(new java.awt.Color(53, 53, 57));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
