@@ -36,14 +36,8 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         ButtonCadastrar = new javax.swing.JButton();
-        ButtonEditar = new javax.swing.JButton();
-        ButtonExcluir = new javax.swing.JButton();
         ButtonLimpar = new javax.swing.JButton();
         ButtonCancelar = new javax.swing.JButton();
-        ButtonBuscar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TabelaFunc = new javax.swing.JTable();
-        BarraBuscar = new javax.swing.JTextField();
         BarraNome = new javax.swing.JTextField();
         BarraCargo = new javax.swing.JTextField();
         BarraCPF = new javax.swing.JTextField();
@@ -54,6 +48,7 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         CPF = new javax.swing.JLabel();
         Usuario = new javax.swing.JLabel();
         Senha = new javax.swing.JLabel();
+        CadFunc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,21 +58,6 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         ButtonCadastrar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonCadastrar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonCadastrar.setPreferredSize(new java.awt.Dimension(105, 23));
-
-        ButtonEditar.setText("Editar");
-        ButtonEditar.setMaximumSize(new java.awt.Dimension(105, 23));
-        ButtonEditar.setMinimumSize(new java.awt.Dimension(105, 23));
-        ButtonEditar.setPreferredSize(new java.awt.Dimension(105, 23));
-        ButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonEditarActionPerformed(evt);
-            }
-        });
-
-        ButtonExcluir.setText("Excluir");
-        ButtonExcluir.setMaximumSize(new java.awt.Dimension(105, 23));
-        ButtonExcluir.setMinimumSize(new java.awt.Dimension(105, 23));
-        ButtonExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
 
         ButtonLimpar.setText("Limpar Campos");
         ButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,61 +71,6 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         ButtonCancelar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonCancelar.setName(""); // NOI18N
         ButtonCancelar.setPreferredSize(new java.awt.Dimension(105, 23));
-
-        ButtonBuscar.setText("Buscar");
-        ButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonBuscarActionPerformed(evt);
-            }
-        });
-
-        TabelaFunc.setBorder(new javax.swing.border.MatteBorder(null));
-        TabelaFunc.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nome", "CPF", "Cargo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(TabelaFunc);
 
         Nome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Nome.setText("Nome");
@@ -162,57 +87,50 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         Senha.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Senha.setText("Senha");
 
+        CadFunc.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        CadFunc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CadFunc.setText("Cadastrar Funcionário");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(BarraBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ButtonBuscar)
-                        .addGap(2, 2, 2))
+                    .addComponent(CadFunc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Nome)
-                            .addComponent(CPF)
-                            .addComponent(Usuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Senha)
-                            .addComponent(Cargo))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BarraCPF)
-                            .addComponent(BarraSenha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BarraUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BarraNome)
-                            .addComponent(BarraCargo, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(23, 23, 23))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(ButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ButtonLimpar)
-                .addGap(18, 18, 18)
-                .addComponent(ButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Nome)
+                                    .addComponent(CPF)
+                                    .addComponent(Usuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Senha)
+                                    .addComponent(Cargo))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(BarraCargo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BarraCPF, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BarraUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BarraNome)
+                                    .addComponent(BarraSenha))
+                                .addGap(57, 57, 57))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(CadFunc)
+                .addGap(18, 79, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BarraNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nome))
@@ -232,14 +150,12 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BarraSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Senha))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonLimpar))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -254,19 +170,13 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonEditarActionPerformed
-
-    private void ButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonBuscarActionPerformed
 
     private void ButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLimparActionPerformed
         limparCampos();
@@ -309,26 +219,21 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BarraBuscar;
     private javax.swing.JTextField BarraCPF;
     private javax.swing.JTextField BarraCargo;
     private javax.swing.JTextField BarraNome;
     private javax.swing.JPasswordField BarraSenha;
     private javax.swing.JTextField BarraUsuario;
-    private javax.swing.JButton ButtonBuscar;
     private javax.swing.JButton ButtonCadastrar;
     private javax.swing.JButton ButtonCancelar;
-    private javax.swing.JButton ButtonEditar;
-    private javax.swing.JButton ButtonExcluir;
     private javax.swing.JButton ButtonLimpar;
     private javax.swing.JLabel CPF;
+    private javax.swing.JLabel CadFunc;
     private javax.swing.JLabel Cargo;
     private javax.swing.JLabel Nome;
     private javax.swing.JLabel Senha;
-    private javax.swing.JTable TabelaFunc;
     private javax.swing.JLabel Usuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
