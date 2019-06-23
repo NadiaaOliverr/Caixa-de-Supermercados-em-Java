@@ -2,11 +2,11 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -32,7 +32,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" pref="432" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -54,42 +54,37 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="CadFunc" alignment="1" pref="607" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="Nome" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Usuario" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Senha" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Cargo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="BarraCargo" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="BarraCPF" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="BarraUsuario" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="BarraNome" max="32767" attributes="0"/>
-                                          <Component id="BarraSenha" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="ButtonCadastrar" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="ButtonLimpar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="ButtonCancelar" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="Nome" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Usuario" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Senha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Cargo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="BarraUsuario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="BarraSenha" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="BarraNome" max="32767" attributes="0"/>
+                                  <Component id="BarraCargo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="BarraCPF" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="ButtonCadastrar" min="-2" pref="105" max="-2" attributes="0"/>
+                              <EmptySpace pref="37" max="32767" attributes="0"/>
+                              <Component id="ButtonLimpar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="29" max="32767" attributes="0"/>
+                              <Component id="ButtonCancelar" min="-2" pref="105" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="CadFunc" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -97,7 +92,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="CadFunc" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" pref="79" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" pref="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="BarraNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Nome" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,13 +117,13 @@
                           <Component id="BarraSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Senha" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ButtonCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -170,6 +165,9 @@
                   <Dimension value="[105, 23]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCancelarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="BarraNome">
             </Component>
@@ -224,7 +222,7 @@
             <Component class="javax.swing.JLabel" name="CadFunc">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial Black" size="36" style="0"/>
+                  <Font name="Arial Black" size="30" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>

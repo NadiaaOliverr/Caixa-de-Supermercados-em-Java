@@ -5,15 +5,14 @@
  */
 package Visual;
 
+
 /**
  *
  * @author user
  */
 public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MercadosNLTelaPesquisarProd
-     */
+    
+    
     public MercadosNLTelaPesquisarProd() {
         initComponents();
     }
@@ -37,7 +36,7 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         ButtonExcluir = new javax.swing.JButton();
         ButtonCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,7 +121,8 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         ButtonEditar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonEditar.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        ButtonExcluir.setText("Excluir");
+        ButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/eraser.png"))); // NOI18N
+        ButtonExcluir.setText("  Excluir");
         ButtonExcluir.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonExcluir.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -131,6 +131,11 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         ButtonCancelar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonCancelar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonCancelar.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,7 +153,7 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
                         .addComponent(ButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(132, 132, 132)
                         .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -183,15 +188,28 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BarraBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarraBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BarraBuscarActionPerformed
 
+    private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_ButtonCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    
+    /*public void preencherTabela(String SQL){
+        ArrayList dados = new ArrayList();
+        String [] colunas = new String[]{"Código", "Nome", "Marca", "Preço"};
+        con = ConectaBanco.conectabanco();
+        
+    }   */     
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

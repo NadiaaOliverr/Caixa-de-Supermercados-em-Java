@@ -36,7 +36,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
         ButtonExcluir = new javax.swing.JButton();
         ButtonCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -132,7 +132,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
         ButtonExcluir.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
 
-        ButtonCancelar.setBackground(new java.awt.Color(31, 31, 36));
+        ButtonCancelar.setBackground(new java.awt.Color(255, 255, 255));
         ButtonCancelar.setText("Cancelar");
         ButtonCancelar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonCancelar.setMinimumSize(new java.awt.Dimension(105, 23));
@@ -202,6 +202,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarActionPerformed
@@ -213,8 +214,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonEditarActionPerformed
 
     private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
-        System.exit(0);
-        // TODO add your handling code here:
+        setVisible(false);
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
     /**

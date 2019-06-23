@@ -14,7 +14,7 @@ public class ConectaBanco {
         
         try{
            Class.forName("org.postgresql.Driver");
-           Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/CRUD","postgres", "root");
+           Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/MercadosNLBD","postgres", "Kerb1000");
           // JOptionPane.showMessageDialog(null,"Conectado com sucesso ao banco de dados!");
            return con;
         }

@@ -48,7 +48,7 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         LabelPreco = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -69,6 +69,11 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         ButtonCancelar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonCancelar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonCancelar.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelarActionPerformed(evt);
+            }
+        });
 
         BarraCodigoDeBarras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,18 +111,18 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 61, Short.MAX_VALUE)
                         .addComponent(ButtonLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BarraNomeP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(BarraNomeP, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BarraCodigoDeBarras, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BarraPreco)
                             .addComponent(BarraMarca, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(60, 60, 60))))
+                        .addGap(48, 48, 48))))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
@@ -159,7 +164,9 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,6 +174,7 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BarraCodigoDeBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarraCodigoDeBarrasActionPerformed
@@ -177,6 +185,10 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         limparCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonLimparActionPerformed
+
+    private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_ButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
