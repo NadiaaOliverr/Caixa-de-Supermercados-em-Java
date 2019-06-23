@@ -28,8 +28,10 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     public void Logar() {
+        MercadosNLTelaInicial enviaTexto = null;
+
         String sql = "select *from usuario where usuario = ? and senha = ?"; //Buscar dado banco
-        String sqlCargo = "select cargo from usuario as u join funcionario as f on u.id_usuario = f.id_funcionario where usuario = ? and senha = ?";
+        String sqlCargo = "select cargo,nome from usuario as u join funcionario as f on u.id_usuario = f.id_funcionario where usuario = ? and senha = ?";
 
         try {
 
@@ -55,15 +57,22 @@ public class TelaLogin extends javax.swing.JFrame {
             if (rs.next()) {
                 if (rsCargo.next()) {
                     String cargo_bd;
+                    String nome_bd;
                     cargo_bd = rsCargo.getString("cargo");
-
+                    nome_bd = rsCargo.getString("nome");
+                    
                     if (caixa_forma1.equals(cargo_bd) || caixa_forma2.equals(cargo_bd) || caixa_forma3.equals(cargo_bd)) {
-                        MercadosNLTelaInicial inicial = new MercadosNLTelaInicial();
-                        inicial.setVisible(true); //Coloca visível o painel inicial
+                        
+                        if(enviaTexto==null)
+                        {
+                            enviaTexto = new MercadosNLTelaInicial();
+                            enviaTexto.setVisible(true);
+                            enviaTexto.recebeDados(nome_bd);
+                        }
                         dispose();
                     } else if (gerente_forma1.equals(cargo_bd) || gerente_forma2.equals(cargo_bd) || gerente_forma3.equals(cargo_bd)){
-                        TelaInicial inicial = new TelaInicial();
-                        inicial.setVisible(true); //Coloca visível o painel inicial
+                        MercadosNLTelaGerente inicial = new MercadosNLTelaGerente();
+                        inicial.setVisible(true); 
                         dispose();
                     }
                 }
