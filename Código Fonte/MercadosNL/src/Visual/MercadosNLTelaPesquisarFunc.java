@@ -115,7 +115,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
             }
         });
 
-        ButtonEditar.setBackground(new java.awt.Color(31, 31, 36));
+        ButtonEditar.setBackground(new java.awt.Color(255, 255, 255));
         ButtonEditar.setText("Editar");
         ButtonEditar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonEditar.setMinimumSize(new java.awt.Dimension(105, 23));
@@ -126,7 +126,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
             }
         });
 
-        ButtonExcluir.setBackground(new java.awt.Color(31, 31, 36));
+        ButtonExcluir.setBackground(new java.awt.Color(255, 255, 255));
         ButtonExcluir.setText("Excluir");
         ButtonExcluir.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonExcluir.setMinimumSize(new java.awt.Dimension(105, 23));

@@ -49,6 +49,7 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
             }
         });
 
+        TabelaProdutos.setBorder(new javax.swing.border.MatteBorder(null));
         TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
