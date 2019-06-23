@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Visual;
 
 import java.sql.*;
@@ -14,51 +9,71 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author user
+ * @author Nádia Oliveira
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    
     Connection con = null;
     PreparedStatement pst = null;
-    ResultSet rs =  null; //ResultSet é uma interface utilizada pra guardar dados vindos de um banco de dados.
-    
+    PreparedStatement pstCargo = null;
+    ResultSet rs = null; //ResultSet é uma interface utilizada pra guardar dados vindos de um banco de dados.
+    ResultSet rsCargo = null;
+
     //Construtor
     public TelaLogin() throws ClassNotFoundException {
         initComponents();
         this.setLocationRelativeTo(null); //Coloca o formulário de login no centro da tela
         con = ConectaBanco.conectabanco();
-        
+
     }
-    
-    public void Logar()
-    {
+
+    public void Logar() {
         String sql = "select *from usuario where usuario = ? and senha = ?"; //Buscar dado banco
-        
-        try{
-            
+        String sqlCargo = "select cargo from usuario as u join funcionario as f on u.id_usuario = f.id_funcionario where usuario = ? and senha = ?";
+
+        try {
+
             pst = con.prepareStatement(sql); //Inicializa a conexão
-            pst.setString(1,txtUsuario.getText());
-            pst.setString(2,txtSenha.getText());
-        
+            pstCargo = con.prepareStatement(sqlCargo);
+            pstCargo.setString(1, txtUsuario.getText());
+            pstCargo.setString(2, txtSenha.getText());
+            pst.setString(1, txtUsuario.getText());
+            pst.setString(2, txtSenha.getText());
+
             rs = pst.executeQuery();
-            
+            rsCargo = pstCargo.executeQuery();
+
+            String caixa_forma1 = "Caixa";
+            String caixa_forma2 = "CAIXA";
+            String caixa_forma3 = "caixa";
+
+            String gerente_forma1 = "Gerente";
+            String gerente_forma2 = "GERENTE";
+            String gerente_forma3 = "gerente";
+
             //Se existe algum registro no banco tal como o digitado, ele chama a tela inicial
-            if(rs.next()){
-                TelaInicial inicial = new TelaInicial();
-                inicial.setVisible(true); //Coloca visível o painel inicial
-                dispose(); //Fecha a tela do login
-            }else{
+            if (rs.next()) {
+                if (rsCargo.next()) {
+                    String cargo_bd;
+                    cargo_bd = rsCargo.getString("cargo");
+
+                    if (caixa_forma1.equals(cargo_bd) || caixa_forma2.equals(cargo_bd) || caixa_forma3.equals(cargo_bd)) {
+                        MercadosNLTelaInicial inicial = new MercadosNLTelaInicial();
+                        inicial.setVisible(true); //Coloca visível o painel inicial
+                        dispose();
+                    } else if (gerente_forma1.equals(cargo_bd) || gerente_forma2.equals(cargo_bd) || gerente_forma3.equals(cargo_bd)){
+                        TelaInicial inicial = new TelaInicial();
+                        inicial.setVisible(true); //Coloca visível o painel inicial
+                        dispose();
+                    }
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!");
             }
-        }
-        
-        catch(SQLException error){
+        } catch (SQLException error) {
             JOptionPane.showMessageDialog(null, error);
         }
     }
-    
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -209,15 +224,9 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
-      
-        Logar();
-        
-        /* if("JoaoBatista".equals(txtUsuario.getText()) && "516281".equals(txtSenha.getText())){
-            JOptionPane.showMessageDialog(null, "Login Efetuado com sucesso" );
-        }else{
-            JOptionPane.showMessageDialog(null, "Usuario ou senha invalida!" );
 
-        }*/
+        Logar();
+
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 
     //Botão de cancelar na tela de login
