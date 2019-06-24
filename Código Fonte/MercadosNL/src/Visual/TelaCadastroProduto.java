@@ -253,6 +253,11 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        txtPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisarActionPerformed(evt);
+            }
+        });
         txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPesquisarKeyReleased(evt);
@@ -408,6 +413,10 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
     private void txtCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarrasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoBarrasActionPerformed
+
+    private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

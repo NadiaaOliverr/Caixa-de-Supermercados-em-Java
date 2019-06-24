@@ -5,23 +5,58 @@
  */
 package Visual;
 
+import DAO.ConectaBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
 public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MercadosNLTelaCadstroProduto
-     */
-    public MercadosNLTelaCadastroProduto() {
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+
+    public MercadosNLTelaCadastroProduto() throws ClassNotFoundException {
         initComponents();
+        con = ConectaBanco.conectabanco();
     }
-    public void limparCampos(){
-        BarraNomeP.setText("");
-        BarraPreco.setText("");
-        BarraMarca.setText("");
-        BarraCodigoDeBarras.setText("");
+
+    public void cadastrarProdutos() {
+        String sql = "insert into produto(nome,cod_barras,preco,marca) values(?,?,?,?)";
+
+        try {
+            if (txtNomeProduto.getText().isEmpty() || txtCodigoBarras.getText().isEmpty() || txtMarcaProduto.getText().isEmpty() || txtPrecoProduto.getText().isEmpty() || txtPrecoProduto.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos", null, JOptionPane.WARNING_MESSAGE);
+            } else {
+                pst = con.prepareStatement(sql);
+                pst.setString(1, txtNomeProduto.getText());
+                pst.setString(2, txtCodigoBarras.getText());
+                pst.setFloat(3, Float.parseFloat(txtPrecoProduto.getText()));
+                pst.setString(4, txtMarcaProduto.getText());
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastrado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, error);
+        }
+
+    }
+
+    public void limparCampos() {
+        txtNomeProduto.setText("");
+        txtPrecoProduto.setText("");
+        txtMarcaProduto.setText("");
+        txtCodigoBarras.setText("");
     }
 
     /**
@@ -38,10 +73,10 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         ButtonCadastrasr = new javax.swing.JButton();
         ButtonLimpar = new javax.swing.JButton();
         ButtonCancelar = new javax.swing.JButton();
-        BarraMarca = new javax.swing.JTextField();
-        BarraNomeP = new javax.swing.JTextField();
-        BarraCodigoDeBarras = new javax.swing.JTextField();
-        BarraPreco = new javax.swing.JTextField();
+        txtMarcaProduto = new javax.swing.JTextField();
+        txtNomeProduto = new javax.swing.JTextField();
+        txtCodigoBarras = new javax.swing.JTextField();
+        txtPrecoProduto = new javax.swing.JTextField();
         LabelNomeP = new javax.swing.JLabel();
         LabelCodigoDeBarras = new javax.swing.JLabel();
         LabelMarca = new javax.swing.JLabel();
@@ -57,6 +92,11 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         ButtonCadastrasr.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonCadastrasr.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonCadastrasr.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonCadastrasr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCadastrasrActionPerformed(evt);
+            }
+        });
 
         ButtonLimpar.setText("Limpar Campos");
         ButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +115,9 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        BarraCodigoDeBarras.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigoBarras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BarraCodigoDeBarrasActionPerformed(evt);
+                txtCodigoBarrasActionPerformed(evt);
             }
         });
 
@@ -118,10 +158,10 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BarraNomeP, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BarraCodigoDeBarras, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BarraPreco)
-                            .addComponent(BarraMarca, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodigoBarras, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrecoProduto)
+                            .addComponent(txtMarcaProduto, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(48, 48, 48))))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -136,20 +176,20 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BarraNomeP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelNomeP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMarcaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelMarca))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelPreco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelCodigoDeBarras)
-                    .addComponent(BarraCodigoDeBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonCadastrasr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,9 +217,9 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BarraCodigoDeBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarraCodigoDeBarrasActionPerformed
+    private void txtCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarrasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BarraCodigoDeBarrasActionPerformed
+    }//GEN-LAST:event_txtCodigoBarrasActionPerformed
 
     private void ButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLimparActionPerformed
         limparCampos();
@@ -189,6 +229,10 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
     private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_ButtonCancelarActionPerformed
+
+    private void ButtonCadastrasrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrasrActionPerformed
+        cadastrarProdutos();
+    }//GEN-LAST:event_ButtonCadastrasrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,16 +264,16 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLTelaCadastroProduto().setVisible(true);
+                try {
+                    new MercadosNLTelaCadastroProduto().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLTelaCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BarraCodigoDeBarras;
-    private javax.swing.JTextField BarraMarca;
-    private javax.swing.JTextField BarraNomeP;
-    private javax.swing.JTextField BarraPreco;
     private javax.swing.JButton ButtonCadastrasr;
     private javax.swing.JButton ButtonCancelar;
     private javax.swing.JButton ButtonLimpar;
@@ -240,5 +284,9 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtCodigoBarras;
+    private javax.swing.JTextField txtMarcaProduto;
+    private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField txtPrecoProduto;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,25 +5,68 @@
  */
 package Visual;
 
+import DAO.ConectaBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
 public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MercadosNLTelaCadastroFunc
-     */
-    public MercadosNLTelaCadastroFunc() {
+    Connection con;
+    PreparedStatement pstFuncionario;
+    PreparedStatement pstUsuario;
+    ResultSet rs;
+
+    public MercadosNLTelaCadastroFunc() throws ClassNotFoundException {
         initComponents();
+        con = ConectaBanco.conectabanco();
     }
-    public void limparCampos(){
-        BarraNome.setText("");
-        BarraCargo.setText("");
-        BarraCPF.setText("");
-        BarraUsuario.setText("");
-        BarraSenha.setText("");
+
+    public void cadastrarFuncionario() {
+        String sqlFuncionario = "insert into funcionario(nome,cargo,cpf) values(?,?,?)";
+        String sqlUsuario = "insert into usuario(usuario,senha) values(?,?)";
+
+        try {
+
+            if (txtNome.getText().isEmpty() || txtCargo.getText().isEmpty() || txtCPF.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos", null, JOptionPane.WARNING_MESSAGE);
+            } else {
+                pstFuncionario = con.prepareStatement(sqlFuncionario);
+                pstUsuario = con.prepareStatement(sqlUsuario);
+                pstFuncionario.setString(1, txtNome.getText());
+                pstFuncionario.setString(2, txtCargo.getText());
+                pstFuncionario.setInt(3, Integer.parseInt(txtCPF.getText()));
+                pstUsuario.setString(1, txtUsuario.getText());
+                pstUsuario.setString(2,String.valueOf(txtSenha.getPassword()));
+
+                pstFuncionario.execute();
+                pstUsuario.execute();
+
+                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "Cadastrado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, error);
+        }
+
     }
+
+    public void limparCampos() {
+        txtNome.setText("");
+        txtCargo.setText("");
+        txtCPF.setText("");
+        txtUsuario.setText("");
+        txtSenha.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,17 +81,18 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         ButtonCadastrar = new javax.swing.JButton();
         ButtonLimpar = new javax.swing.JButton();
         ButtonCancelar = new javax.swing.JButton();
-        BarraNome = new javax.swing.JTextField();
-        BarraCargo = new javax.swing.JTextField();
-        BarraCPF = new javax.swing.JTextField();
-        BarraUsuario = new javax.swing.JTextField();
-        BarraSenha = new javax.swing.JPasswordField();
+        txtNome = new javax.swing.JTextField();
+        txtCargo = new javax.swing.JTextField();
+        txtCPF = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JPasswordField();
         Nome = new javax.swing.JLabel();
         Cargo = new javax.swing.JLabel();
         CPF = new javax.swing.JLabel();
         Usuario = new javax.swing.JLabel();
         Senha = new javax.swing.JLabel();
         CadFunc = new javax.swing.JLabel();
+        checkSenha = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,6 +102,11 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         ButtonCadastrar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonCadastrar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonCadastrar.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCadastrarActionPerformed(evt);
+            }
+        });
 
         ButtonLimpar.setText("Limpar Campos");
         ButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +145,13 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         CadFunc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CadFunc.setText("Cadastrar Funcionário");
 
+        checkSenha.setText("Visualizar Senha");
+        checkSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,6 +160,13 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(ButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addComponent(ButtonLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Nome)
                             .addComponent(CPF)
@@ -112,18 +175,14 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
                             .addComponent(Cargo))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BarraUsuario)
-                            .addComponent(BarraSenha)
-                            .addComponent(BarraNome)
-                            .addComponent(BarraCargo)
-                            .addComponent(BarraCPF)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(ButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(ButtonLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(checkSenha)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtUsuario)
+                            .addComponent(txtSenha)
+                            .addComponent(txtNome)
+                            .addComponent(txtCargo)
+                            .addComponent(txtCPF))))
                 .addGap(36, 36, 36))
             .addComponent(CadFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -134,30 +193,32 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
                 .addComponent(CadFunc)
                 .addGap(18, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nome))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cargo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CPF))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Usuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Senha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(checkSenha)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonLimpar))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -190,6 +251,19 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
+    private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
+        cadastrarFuncionario();
+    }//GEN-LAST:event_ButtonCadastrarActionPerformed
+
+    private void checkSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkSenhaActionPerformed
+        if(checkSenha.isSelected())
+        {
+            txtSenha.setEchoChar((char)0);
+        }else{
+            txtSenha.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkSenhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,17 +294,16 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLTelaCadastroFunc().setVisible(true);
+                try {
+                    new MercadosNLTelaCadastroFunc().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLTelaCadastroFunc.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BarraCPF;
-    private javax.swing.JTextField BarraCargo;
-    private javax.swing.JTextField BarraNome;
-    private javax.swing.JPasswordField BarraSenha;
-    private javax.swing.JTextField BarraUsuario;
     private javax.swing.JButton ButtonCadastrar;
     private javax.swing.JButton ButtonCancelar;
     private javax.swing.JButton ButtonLimpar;
@@ -240,7 +313,13 @@ public class MercadosNLTelaCadastroFunc extends javax.swing.JFrame {
     private javax.swing.JLabel Nome;
     private javax.swing.JLabel Senha;
     private javax.swing.JLabel Usuario;
+    private javax.swing.JCheckBox checkSenha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtCPF;
+    private javax.swing.JTextField txtCargo;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

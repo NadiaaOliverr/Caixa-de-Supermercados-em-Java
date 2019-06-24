@@ -72,10 +72,10 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="BarraNomeP" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BarraCodigoDeBarras" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BarraPreco" max="32767" attributes="0"/>
-                                  <Component id="BarraMarca" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtNomeProduto" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtCodigoBarras" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtPrecoProduto" max="32767" attributes="0"/>
+                                  <Component id="txtMarcaProduto" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           </Group>
@@ -96,23 +96,23 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="BarraNomeP" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomeProduto" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelNomeP" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraMarca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMarcaProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraPreco" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPrecoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LabelPreco" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LabelCodigoDeBarras" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BarraCodigoDeBarras" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCodigoBarras" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -139,6 +139,9 @@
                   <Dimension value="[105, 23]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCadastrasrActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonLimpar">
               <Properties>
@@ -165,16 +168,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCancelarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraMarca">
+            <Component class="javax.swing.JTextField" name="txtMarcaProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraNomeP">
+            <Component class="javax.swing.JTextField" name="txtNomeProduto">
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraCodigoDeBarras">
+            <Component class="javax.swing.JTextField" name="txtCodigoBarras">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BarraCodigoDeBarrasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoBarrasActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraPreco">
+            <Component class="javax.swing.JTextField" name="txtPrecoProduto">
             </Component>
             <Component class="javax.swing.JLabel" name="LabelNomeP">
               <Properties>

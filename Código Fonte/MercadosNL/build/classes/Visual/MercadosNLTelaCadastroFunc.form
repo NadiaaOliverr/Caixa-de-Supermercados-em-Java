@@ -57,6 +57,14 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="ButtonCadastrar" min="-2" pref="105" max="-2" attributes="0"/>
+                              <EmptySpace pref="37" max="32767" attributes="0"/>
+                              <Component id="ButtonLimpar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="29" max="32767" attributes="0"/>
+                              <Component id="ButtonCancelar" min="-2" pref="105" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="Nome" min="-2" max="-2" attributes="0"/>
                                   <Component id="CPF" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -66,20 +74,16 @@
                               </Group>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="BarraUsuario" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BarraSenha" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BarraNome" max="32767" attributes="0"/>
-                                  <Component id="BarraCargo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="BarraCPF" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="checkSenha" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtUsuario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtSenha" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtNome" max="32767" attributes="0"/>
+                                  <Component id="txtCargo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtCPF" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="ButtonCadastrar" min="-2" pref="105" max="-2" attributes="0"/>
-                              <EmptySpace pref="37" max="32767" attributes="0"/>
-                              <Component id="ButtonLimpar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="29" max="32767" attributes="0"/>
-                              <Component id="ButtonCancelar" min="-2" pref="105" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -94,36 +98,38 @@
                       <Component id="CadFunc" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" pref="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Nome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Cargo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CPF" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Usuario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Senha" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <Component id="checkSenha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ButtonCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="44" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -142,6 +148,9 @@
                   <Dimension value="[105, 23]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCadastrarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonLimpar">
               <Properties>
@@ -169,15 +178,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCancelarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraNome">
+            <Component class="javax.swing.JTextField" name="txtNome">
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraCargo">
+            <Component class="javax.swing.JTextField" name="txtCargo">
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraCPF">
+            <Component class="javax.swing.JTextField" name="txtCPF">
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraUsuario">
+            <Component class="javax.swing.JTextField" name="txtUsuario">
             </Component>
-            <Component class="javax.swing.JPasswordField" name="BarraSenha">
+            <Component class="javax.swing.JPasswordField" name="txtSenha">
             </Component>
             <Component class="javax.swing.JLabel" name="Nome">
               <Properties>
@@ -227,6 +236,14 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="checkSenha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Visualizar Senha"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkSenhaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -51,7 +51,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="BarraBuscar" pref="507" max="32767" attributes="0"/>
+                              <Component id="txtPesquisar" pref="507" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="ButtonBuscar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -73,7 +73,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BarraBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ButtonBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -95,14 +95,15 @@
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="BarraBuscar">
+            <Component class="javax.swing.JTextField" name="txtPesquisar">
               <Properties>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor de Texto"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BarraBuscarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPesquisarActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPesquisarKeyReleased"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -112,7 +113,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="TabelaProdutos">
+                <Component class="javax.swing.JTable" name="tabelaProdutos">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
@@ -120,12 +121,36 @@
                       </Border>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="50">
-                        <Column editable="true" title="C&#xf3;digo" type="java.lang.Integer"/>
-                        <Column editable="true" title="Nome" type="java.lang.String"/>
-                        <Column editable="true" title="Marca" type="java.lang.String"/>
-                        <Column editable="true" title="Pre&#xe7;o" type="java.lang.Double"/>
+                      <Table columnCount="4" rowCount="1">
+                        <Column editable="true" title="T&#xed;tulo 1" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#xed;tulo 2" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#xed;tulo 3" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#xed;tulo 4" type="java.lang.Object"/>
                       </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -164,6 +189,9 @@
                   <Dimension value="[105, 23]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonExcluirActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonCancelar">
               <Properties>

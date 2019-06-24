@@ -5,6 +5,9 @@
  */
 package Visual;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author user
@@ -16,6 +19,12 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
      */
     public MercadosNLTelaGerente() {
         initComponents();
+    }
+   
+    String recebeNome;
+    public void recebeDados(String recebe) {
+        this.recebeNome = recebe;
+        txtNomeGerente.setText(recebe);
     }
 
     /**
@@ -45,7 +54,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         ButtonEmitirRel = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        txtNomeGerente = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         MenuArquivo = new javax.swing.JMenu();
         SubMenuVenda = new javax.swing.JMenuItem();
@@ -191,8 +200,8 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         jLabel1.setText("Nome:");
 
-        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel3.setText("Nome do Admin");
+        txtNomeGerente.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        txtNomeGerente.setText("Nome do Admin");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -202,7 +211,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(txtNomeGerente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -211,7 +220,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                    .addComponent(txtNomeGerente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -327,19 +336,37 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadProdActionPerformed
-        new MercadosNLTelaCadastroProduto().setVisible(true);
+        try {
+            new MercadosNLTelaCadastroProduto().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonCadProdActionPerformed
 
     private void ButtonCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadFuncActionPerformed
-        new MercadosNLTelaCadastroFunc().setVisible(true);
+        try {
+            new MercadosNLTelaCadastroFunc().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonCadFuncActionPerformed
 
     private void ButtonAbrirVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAbrirVendaActionPerformed
-        new MercadosNLTelaInicial().setVisible(true);
+        MercadosNLTelaInicial enviaTexto = null;
+        if (enviaTexto == null) {
+            enviaTexto = new MercadosNLTelaInicial();
+            enviaTexto.setVisible(true);
+            enviaTexto.recebeDados(recebeNome);
+        }
+
     }//GEN-LAST:event_ButtonAbrirVendaActionPerformed
 
     private void ButtonPesquisarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPesquisarProdActionPerformed
-        new MercadosNLTelaPesquisarProd().setVisible(true);
+        try {
+            new MercadosNLTelaPesquisarProd().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonPesquisarProdActionPerformed
 
     private void ButtonPesquisarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPesquisarFuncActionPerformed
@@ -351,19 +378,31 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_SubMenuVendaActionPerformed
 
     private void SubMenuEmitirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuEmitirRelatActionPerformed
-        
+
     }//GEN-LAST:event_SubMenuEmitirRelatActionPerformed
 
     private void SubMenuFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuFuncActionPerformed
-        new MercadosNLTelaCadastroFunc().setVisible(true);
+        try {
+            new MercadosNLTelaCadastroFunc().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SubMenuFuncActionPerformed
 
     private void SubMenuProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuProdActionPerformed
-        new MercadosNLTelaCadastroProduto().setVisible(true);
+        try {
+            new MercadosNLTelaCadastroProduto().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SubMenuProdActionPerformed
 
     private void SubMenuExibiProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuExibiProdActionPerformed
-        new MercadosNLTelaPesquisarProd().setVisible(true);
+        try {
+            new MercadosNLTelaPesquisarProd().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SubMenuExibiProdActionPerformed
 
     private void SubMenuExibirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuExibirFuncActionPerformed
@@ -423,7 +462,6 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem SubMenuVenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -435,5 +473,6 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel txtNomeGerente;
     // End of variables declaration//GEN-END:variables
 }

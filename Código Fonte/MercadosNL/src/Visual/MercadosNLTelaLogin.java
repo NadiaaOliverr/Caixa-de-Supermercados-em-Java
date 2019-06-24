@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author Nádia Oliveira
  */
-public class TelaLogin extends javax.swing.JFrame {
+public class MercadosNLTelaLogin extends javax.swing.JFrame {
 
     Connection con = null;
     PreparedStatement pst = null;
@@ -20,7 +20,7 @@ public class TelaLogin extends javax.swing.JFrame {
     ResultSet rsCargo = null;
 
     //Construtor
-    public TelaLogin() throws ClassNotFoundException {
+    public MercadosNLTelaLogin() throws ClassNotFoundException {
         initComponents();
         this.setLocationRelativeTo(null); //Coloca o formulário de login no centro da tela
         con = ConectaBanco.conectabanco();
@@ -29,6 +29,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     public void Logar() {
         MercadosNLTelaInicial enviaTexto = null;
+        MercadosNLTelaGerente enviaText = null;
 
         String sql = "select *from usuario where usuario = ? and senha = ?"; //Buscar dado banco
         String sqlCargo = "select cargo,nome from usuario as u join funcionario as f on u.id_usuario = f.id_funcionario where usuario = ? and senha = ?";
@@ -71,8 +72,12 @@ public class TelaLogin extends javax.swing.JFrame {
                         }
                         dispose();
                     } else if (gerente_forma1.equals(cargo_bd) || gerente_forma2.equals(cargo_bd) || gerente_forma3.equals(cargo_bd)){
-                        MercadosNLTelaGerente inicial = new MercadosNLTelaGerente();
-                        inicial.setVisible(true); 
+                        if(enviaTexto==null)
+                        {
+                            enviaText = new MercadosNLTelaGerente();
+                            enviaText.setVisible(true);
+                            enviaText.recebeDados(nome_bd);
+                        }
                         dispose();
                     }
                 }
@@ -261,23 +266,24 @@ public class TelaLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MercadosNLTelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MercadosNLTelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MercadosNLTelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MercadosNLTelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new TelaLogin().setVisible(true);
+                    new MercadosNLTelaLogin().setVisible(true);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MercadosNLTelaLogin.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
