@@ -6,15 +6,97 @@
 
 package Visual;
 
+import DAO.ConectaBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author user
  */
 public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
 
-    /** Creates new form MercadosNLTelaPesquisarFunc */
-    public MercadosNLTelaPesquisarFunc() {
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    
+    public MercadosNLTelaPesquisarFunc() throws ClassNotFoundException {
         initComponents();
+        con = ConectaBanco.conectabanco();
+        listarFuncionarios();
+    }
+    
+    public void listarFuncionarios() throws ClassNotFoundException {
+       
+        String sql = "select * from funcionario order by id_funcionario Asc";
+
+        try {
+
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            tabelaFuncionarios.setModel(DbUtils.resultSetToTableModel(rs));
+
+           tabelaFuncionarios.getColumnModel().getColumn(0).setHeaderValue("Código");
+            tabelaFuncionarios.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            tabelaFuncionarios.getColumnModel().getColumn(2).setHeaderValue("Cargo");
+            tabelaFuncionarios.getColumnModel().getColumn(3).setHeaderValue("CPF");
+            tabelaFuncionarios.getTableHeader().resizeAndRepaint();
+
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, error);
+        }
+    }
+    
+    
+     public void pesquisarFuncionarios() {
+        String sql = "select * from funcionario where nome like ?";
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, txtPesquisar.getText() + "%");
+            rs = pst.executeQuery();
+            tabelaFuncionarios.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            tabelaFuncionarios.getColumnModel().getColumn(0).setHeaderValue("Código");
+            tabelaFuncionarios.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            tabelaFuncionarios.getColumnModel().getColumn(2).setHeaderValue("Cargo");
+            tabelaFuncionarios.getColumnModel().getColumn(3).setHeaderValue("CPF");
+            tabelaFuncionarios.getTableHeader().resizeAndRepaint();
+        } catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, error);
+        }
+
+    }
+     
+    public void deletar() throws ClassNotFoundException {
+
+        String sql = "delete from funcionario where id_funcionario = ?";
+        int row = tabelaFuncionarios.getSelectedRow();
+        String valor = tabelaFuncionarios.getValueAt(row, 0).toString();
+
+        Object[] options = {"Confirmar", "Cancelar"};
+        switch (JOptionPane.showOptionDialog(null, "Deseja mesmo excluir?", "Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0])) {
+            case 0:
+                try {
+                    pst = con.prepareStatement(sql);
+                    pst.setInt(1, Integer.parseInt(valor));
+                    pst.execute();
+
+                    listarFuncionarios();
+                } catch (SQLException error) {
+
+                    JOptionPane.showMessageDialog(null, error);
+                }
+                break;
+        }
     }
 
     /** This method is called from within the constructor to
@@ -29,8 +111,8 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TabelaFunc = new javax.swing.JTable();
-        BarraBuscar = new javax.swing.JTextField();
+        tabelaFuncionarios = new javax.swing.JTable();
+        txtPesquisar = new javax.swing.JTextField();
         ButtonBuscar = new javax.swing.JButton();
         ButtonEditar = new javax.swing.JButton();
         ButtonExcluir = new javax.swing.JButton();
@@ -40,8 +122,8 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        TabelaFunc.setBorder(new javax.swing.border.MatteBorder(null));
-        TabelaFunc.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFuncionarios.setBorder(new javax.swing.border.MatteBorder(null));
+        tabelaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -106,7 +188,13 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TabelaFunc);
+        jScrollPane2.setViewportView(tabelaFuncionarios);
+
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyReleased(evt);
+            }
+        });
 
         ButtonBuscar.setText("Buscar");
         ButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +219,11 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
         ButtonExcluir.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonExcluir.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonExcluirActionPerformed(evt);
+            }
+        });
 
         ButtonCancelar.setBackground(new java.awt.Color(255, 255, 255));
         ButtonCancelar.setText("Cancelar");
@@ -152,7 +245,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BarraBuscar)
+                        .addComponent(txtPesquisar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ButtonBuscar)
                         .addGap(20, 20, 20))
@@ -172,7 +265,7 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonBuscar))
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
@@ -210,12 +303,40 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonBuscarActionPerformed
 
     private void ButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        int seleciona = tabelaFuncionarios.getSelectedRow();
+        String nome = tabelaFuncionarios.getModel().getValueAt(seleciona, 1).toString();
+        String cpf = tabelaFuncionarios.getModel().getValueAt(seleciona, 3).toString();
+        String cargo = tabelaFuncionarios.getModel().getValueAt(seleciona, 2).toString();
+        String codigo =   tabelaFuncionarios.getModel().getValueAt(seleciona, 0).toString();
+       
+        
+        MercadosNLTelaEdicaoFunc enviaTexto;
+        enviaTexto = null;
+        try {
+            enviaTexto = new MercadosNLTelaEdicaoFunc();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaPesquisarFunc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        enviaTexto.setVisible(true);
+        enviaTexto.recebeDados(nome, cpf, cargo, codigo);
     }//GEN-LAST:event_ButtonEditarActionPerformed
 
     private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
-        setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_ButtonCancelarActionPerformed
+
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
+        pesquisarFuncionarios();
+    }//GEN-LAST:event_txtPesquisarKeyReleased
+
+    private void ButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonExcluirActionPerformed
+        try {
+            deletar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaPesquisarFunc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,21 +368,25 @@ public class MercadosNLTelaPesquisarFunc extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLTelaPesquisarFunc().setVisible(true);
+                try {
+                    new MercadosNLTelaPesquisarFunc().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLTelaPesquisarFunc.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BarraBuscar;
     private javax.swing.JButton ButtonBuscar;
     private javax.swing.JButton ButtonCancelar;
     private javax.swing.JButton ButtonEditar;
     private javax.swing.JButton ButtonExcluir;
-    private javax.swing.JTable TabelaFunc;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tabelaFuncionarios;
+    private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 
 }

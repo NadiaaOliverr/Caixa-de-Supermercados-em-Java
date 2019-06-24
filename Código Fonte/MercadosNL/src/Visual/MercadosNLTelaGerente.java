@@ -198,7 +198,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Olá");
 
         txtNomeGerente.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         txtNomeGerente.setText("Nome do Admin");
@@ -370,7 +370,11 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonPesquisarProdActionPerformed
 
     private void ButtonPesquisarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPesquisarFuncActionPerformed
-        new MercadosNLTelaPesquisarFunc().setVisible(true);
+        try {
+            new MercadosNLTelaPesquisarFunc().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonPesquisarFuncActionPerformed
 
     private void SubMenuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuVendaActionPerformed
@@ -406,7 +410,11 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_SubMenuExibiProdActionPerformed
 
     private void SubMenuExibirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuExibirFuncActionPerformed
-        new MercadosNLTelaPesquisarFunc().setVisible(true);
+        try {
+            new MercadosNLTelaPesquisarFunc().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SubMenuExibirFuncActionPerformed
 
     /**
