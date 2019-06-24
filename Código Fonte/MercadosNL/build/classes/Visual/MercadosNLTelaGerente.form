@@ -419,7 +419,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="15" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Nome:"/>
+                    <Property name="text" type="java.lang.String" value="Ol&#xe1;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="txtNomeGerente">

@@ -5,24 +5,80 @@
  */
 package Visual;
 
+import DAO.ConectaBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.xml.transform.Source;
+
 /**
  *
  * @author user
  */
 public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MercadosNLTelaEdicaoProd
-     */
-    public MercadosNLTelaEdicaoProd() {
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    String id;
+    
+    public MercadosNLTelaEdicaoProd() throws ClassNotFoundException {
         initComponents();
+        con = ConectaBanco.conectabanco();
+        
+    }
+    public void recebeDados(String nome, String marca, String preco, String codigo, String id_codigo)
+    {
+        txtNome.setText(nome);
+        txtMarca.setText(marca);
+        txtPreco.setText(preco);
+        txtCodigoBarras.setText(codigo);
+        this.id = id_codigo;
+    }
+    
+    
+    
+    public void editarProdutos() throws ClassNotFoundException
+    {
+        String sql = "update produto set nome = ?, cod_barras = ?, preco = ?, marca= ? where id_produto = ?";
+        
+        try{
+             if (txtNome.getText().isEmpty() || txtCodigoBarras.getText().isEmpty() || txtMarca.getText().isEmpty() || txtPreco.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos", null, JOptionPane.WARNING_MESSAGE);
+            } else {
+             MercadosNLTelaPesquisarProd lista = null;
+             pst = con.prepareStatement(sql);
+             pst.setString(1,txtNome.getText());
+             pst.setString(2,txtCodigoBarras.getText());
+             pst.setFloat(3, Float.parseFloat(txtPreco.getText()));
+             pst.setString(4,txtMarca.getText());
+             pst.setInt(5,Integer.parseInt(id));
+             
+             lista = new MercadosNLTelaPesquisarProd();
+             
+             
+             pst.executeUpdate();
+             lista.setVisible(true);
+             lista.listarProdutos();
+             JOptionPane.showMessageDialog(null,"Cadastro Atualizado com sucesso!");
+             }
+        }
+        
+        catch(SQLException error){
+            
+            JOptionPane.showMessageDialog(null,error);
+        }
     }
     
     public void limparCampos() {
-        BarraNome.setText("");
-        BarraMarca.setText("");
-        BarraPreco.setText("");
-        BarraCodigo.setText("");
+        txtNome.setText("");
+        txtMarca.setText("");
+        txtPreco.setText("");
+        txtCodigoBarras.setText("");
     }
 
     /**
@@ -41,10 +97,10 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        BarraNome = new javax.swing.JTextField();
-        BarraMarca = new javax.swing.JTextField();
-        BarraPreco = new javax.swing.JTextField();
-        BarraCodigo = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
+        txtPreco = new javax.swing.JTextField();
+        txtCodigoBarras = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -66,6 +122,11 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
         jLabel5.setText("Código");
 
         jButton1.setText("Confirmar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpar Campos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +136,11 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
         });
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,36 +151,27 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(23, 23, 23)
-                                .addComponent(BarraCodigo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addComponent(jButton3))))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jButton3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(13, 13, 13)
-                                    .addComponent(jLabel2)
-                                    .addGap(29, 29, 29))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel3)
-                                    .addGap(30, 30, 30)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4)
-                                .addGap(32, 32, 32)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BarraMarca, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BarraPreco, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BarraNome))))
+                            .addComponent(txtMarca, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPreco, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addGap(26, 26, 26)
+                        .addComponent(txtCodigoBarras)))
                 .addGap(41, 41, 41))
         );
 
@@ -130,20 +187,20 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BarraNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BarraPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(BarraCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -170,13 +227,26 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        limparCampos();
+      limparCampos();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            editarProdutos();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaEdicaoProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -203,16 +273,16 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLTelaEdicaoProd().setVisible(true);
+                try {
+                    new MercadosNLTelaEdicaoProd().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLTelaEdicaoProd.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BarraCodigo;
-    private javax.swing.JTextField BarraMarca;
-    private javax.swing.JTextField BarraNome;
-    private javax.swing.JTextField BarraPreco;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -223,5 +293,9 @@ public class MercadosNLTelaEdicaoProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtCodigoBarras;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }

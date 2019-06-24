@@ -31,9 +31,11 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         initComponents();
         con = ConectaBanco.conectabanco();
         listarProdutos();
+       
     }
 
-    public void listarProdutos() {
+    public void listarProdutos() throws ClassNotFoundException {
+       
         String sql = "select * from produto order by id_produto Asc";
 
         try {
@@ -44,9 +46,13 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
 
             tabelaProdutos.getColumnModel().getColumn(0).setHeaderValue("Código");
             tabelaProdutos.getColumnModel().getColumn(1).setHeaderValue("Nome");
-            tabelaProdutos.getColumnModel().getColumn(2).setHeaderValue("Marca");
+            tabelaProdutos.getColumnModel().getColumn(2).setHeaderValue("Código de Barras");
             tabelaProdutos.getColumnModel().getColumn(3).setHeaderValue("Preço");
+            tabelaProdutos.getColumnModel().getColumn(4).setHeaderValue("Marca");
             tabelaProdutos.getTableHeader().resizeAndRepaint();
+            
+            
+          
 
         } catch (SQLException error) {
 
@@ -62,6 +68,13 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
             pst.setString(1, txtPesquisar.getText() + "%");
             rs = pst.executeQuery();
             tabelaProdutos.setModel(DbUtils.resultSetToTableModel(rs));
+            
+            tabelaProdutos.getColumnModel().getColumn(0).setHeaderValue("Código");
+            tabelaProdutos.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            tabelaProdutos.getColumnModel().getColumn(2).setHeaderValue("Código de Barras");
+            tabelaProdutos.getColumnModel().getColumn(3).setHeaderValue("Preço");
+            tabelaProdutos.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            tabelaProdutos.getTableHeader().resizeAndRepaint();
         } catch (SQLException error) {
 
             JOptionPane.showMessageDialog(null, error);
@@ -69,7 +82,7 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
 
     }
 
-    public void deletar() {
+    public void deletar() throws ClassNotFoundException {
 
         String sql = "delete from produto where id_produto = ?";
         int row = tabelaProdutos.getSelectedRow();
@@ -91,6 +104,9 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
                 break;
         }
     }
+    
+    
+    
 
         /**
          * This method is called from within the constructor to initialize the
@@ -144,6 +160,11 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         ButtonEditar.setMaximumSize(new java.awt.Dimension(105, 23));
         ButtonEditar.setMinimumSize(new java.awt.Dimension(105, 23));
         ButtonEditar.setPreferredSize(new java.awt.Dimension(105, 23));
+        ButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEditarActionPerformed(evt);
+            }
+        });
 
         ButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/eraser.png"))); // NOI18N
         ButtonExcluir.setText("  Excluir");
@@ -233,8 +254,35 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisarKeyReleased
 
     private void ButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonExcluirActionPerformed
-        deletar();
+        try {
+            deletar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaPesquisarProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonExcluirActionPerformed
+
+    private void ButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditarActionPerformed
+        
+        this.dispose();
+        int seleciona = tabelaProdutos.getSelectedRow();
+        String nome = tabelaProdutos.getModel().getValueAt(seleciona, 1).toString();
+        String marca = tabelaProdutos.getModel().getValueAt(seleciona, 3).toString();
+        String preco = tabelaProdutos.getModel().getValueAt(seleciona, 4).toString();
+        String codigoBarras = tabelaProdutos.getModel().getValueAt(seleciona, 2).toString();
+        String codigo =   tabelaProdutos.getModel().getValueAt(seleciona, 0).toString();
+       
+        
+        MercadosNLTelaEdicaoProd enviaTexto;
+        enviaTexto = null;
+        try {
+            enviaTexto = new MercadosNLTelaEdicaoProd();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaPesquisarProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        enviaTexto.setVisible(true);
+        enviaTexto.recebeDados(nome,preco,marca,codigoBarras,codigo);
+      
+    }//GEN-LAST:event_ButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
