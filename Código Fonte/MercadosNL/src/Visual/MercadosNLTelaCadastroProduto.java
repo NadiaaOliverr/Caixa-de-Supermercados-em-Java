@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,14 +33,14 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
         con = ConectaBanco.conectabanco();
     }
 
-    public void cadastrarProdutos() {
+    public void cadastrarProdutos() throws ParseException {
         String sql = "insert into produto(nome,cod_barras,preco,marca) values(?,?,?,?)";
-
         try {
             if (txtNomeProduto.getText().isEmpty() || txtCodigoBarras.getText().isEmpty() || txtMarcaProduto.getText().isEmpty() || txtPrecoProduto.getText().isEmpty() || txtPrecoProduto.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos", null, JOptionPane.WARNING_MESSAGE);
             } else {
                 pst = con.prepareStatement(sql);
+                
                 pst.setString(1, txtNomeProduto.getText());
                 pst.setString(2, txtCodigoBarras.getText());
                 pst.setFloat(3, Float.parseFloat(txtPrecoProduto.getText()));
@@ -231,7 +235,11 @@ public class MercadosNLTelaCadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
     private void ButtonCadastrasrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrasrActionPerformed
-        cadastrarProdutos();
+        try {
+            cadastrarProdutos();
+        } catch (ParseException ex) {
+            Logger.getLogger(MercadosNLTelaCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonCadastrasrActionPerformed
 
     /**

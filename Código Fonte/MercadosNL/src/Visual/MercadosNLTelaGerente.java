@@ -354,7 +354,11 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     private void ButtonAbrirVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAbrirVendaActionPerformed
         MercadosNLTelaInicial enviaTexto = null;
         if (enviaTexto == null) {
-            enviaTexto = new MercadosNLTelaInicial();
+            try {
+                enviaTexto = new MercadosNLTelaInicial();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
             enviaTexto.setVisible(true);
             enviaTexto.recebeDados(recebeNome);
         }
@@ -378,7 +382,11 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonPesquisarFuncActionPerformed
 
     private void SubMenuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuVendaActionPerformed
-        new MercadosNLTelaInicial().setVisible(true);
+        try {
+            new MercadosNLTelaInicial().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_SubMenuVendaActionPerformed
 
     private void SubMenuEmitirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuEmitirRelatActionPerformed

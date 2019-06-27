@@ -27,7 +27,7 @@ public class MercadosNLTelaLogin extends javax.swing.JFrame {
 
     }
 
-    public void Logar() {
+    public void Logar() throws ClassNotFoundException {
         MercadosNLTelaInicial enviaTexto = null;
         MercadosNLTelaGerente enviaText = null;
 
@@ -239,7 +239,11 @@ public class MercadosNLTelaLogin extends javax.swing.JFrame {
 
     private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
 
-        Logar();
+        try {
+            Logar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MercadosNLTelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 

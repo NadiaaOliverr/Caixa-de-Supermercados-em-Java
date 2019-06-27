@@ -5,23 +5,40 @@
  */
 package Visual;
 
+import DAO.ConectaBanco;
+import Cálculos.PrecoTotalCompra;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
 public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MercadosNLTelaInicial
-     */
-    public MercadosNLTelaInicial() {
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    int f2_pressionado = 0;
+    static float soma;
+    public MercadosNLTelaInicial() throws ClassNotFoundException {
         initComponents();
+        con = ConectaBanco.conectabanco();
     }
 
-    public void recebeDados(String recebe)
-    {
+    public void recebeDados(String recebe) {
         txtNome.setText(recebe);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,12 +54,12 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         txtNome = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
+        txtCodigoBarras = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        txtPreco = new javax.swing.JLabel();
+        txtNomeProduto = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -50,7 +67,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txtPrecoTotal = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         label3 = new java.awt.Label();
         label5 = new java.awt.Label();
@@ -66,6 +83,14 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
             }
         });
 
@@ -110,10 +135,15 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
         label1.setText("Código do Produto - F1 para pesquisar");
 
-        jTextField1.setBackground(new java.awt.Color(183, 183, 183));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigoBarras.setBackground(new java.awt.Color(183, 183, 183));
+        txtCodigoBarras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCodigoBarrasActionPerformed(evt);
+            }
+        });
+        txtCodigoBarras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoBarrasKeyPressed(evt);
             }
         });
 
@@ -124,7 +154,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
+                    .addComponent(txtCodigoBarras)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -136,7 +166,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -162,12 +192,12 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(31, 31, 36));
-        jLabel8.setText("R$ 0,00");
+        txtPreco.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
+        txtPreco.setForeground(new java.awt.Color(31, 31, 36));
+        txtPreco.setText("R$ 0,00");
 
-        jLabel10.setFont(new java.awt.Font("Arial Black", 0, 26)); // NOI18N
-        jLabel10.setText("Nome do Produto");
+        txtNomeProduto.setFont(new java.awt.Font("Arial Black", 0, 26)); // NOI18N
+        txtNomeProduto.setText("Nome do Produto");
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel11.setText("Nome do Produto:");
@@ -183,11 +213,11 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(txtNomeProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8))
+                        .addComponent(txtPreco))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -200,14 +230,14 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(0, 63, Short.MAX_VALUE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel11Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(jLabel10)
+                                .addComponent(txtNomeProduto)
                                 .addGap(0, 72, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,9 +283,9 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Valor Total(R$):");
 
-        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("0,00");
+        txtPrecoTotal.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
+        txtPrecoTotal.setForeground(new java.awt.Color(255, 255, 255));
+        txtPrecoTotal.setText("0,00");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -270,7 +300,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
+                        .addComponent(txtPrecoTotal)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -281,7 +311,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -402,56 +432,118 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void txtCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarrasActionPerformed
+        //Variáveis:
+        boolean vender = true;
+        DecimalFormat df = new DecimalFormat("0.00");
+        int quantidade = 0;
+        String cb_quatro_caracteres = null;
+        String[] valores = null;
+        String codigo_barras = null;
+        df.setMaximumFractionDigits(2);
+        String sql = null;
+        
+        while (vender == true) {
+            codigo_barras = txtCodigoBarras.getText();
+            if (codigo_barras.contains("x")) {
+                valores = codigo_barras.split("x");
+                cb_quatro_caracteres = codigo_barras.substring(0, 4);
+                sql = "select * from produto where cod_barras like '"
+                        + valores[1] + "'";
+                try {
+                    pst = con.prepareStatement(sql);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    rs = pst.executeQuery();
+                    if (rs.next()) {
+                        txtNomeProduto.setText(rs.getString("nome"));
+                        String preco = rs.getString("preco");
+                        Float preco_prod = Float.parseFloat(preco);
+                        quantidade = Integer.parseInt(valores[0]);
+                        txtPreco.setText(String.valueOf(preco_prod));
+                        //txtPreco.setText(String.valueOf(PrecoTotalCompra.TotalCompra(quantidade, preco_prod)));
+                        txtCodigoBarras.setText("");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                vender = false;
+            }else if(!codigo_barras.contains("x") || codigo_barras.equals(""))
+            {
+                 sql = "select * from produto where cod_barras like '"
+                            + txtCodigoBarras.getText() + "'";  
+                try {
+                    pst = con.prepareStatement(sql);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    rs = pst.executeQuery();
+                     if (rs.next()) {
+                        txtNomeProduto.setText(rs.getString("nome"));
+                        String preco = rs.getString("preco");
+                        Float preco_prod = Float.parseFloat(preco);
+                        soma = soma + preco_prod;
+                        txtPrecoTotal.setText(String.valueOf(PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma)));
+                        txtPreco.setText(String.valueOf(preco_prod));
+                        txtCodigoBarras.setText("");
+                     }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                vender = false;
+            }else {
+                JOptionPane.showMessageDialog(null, "Este produto não está cadastrado");}
+        }
+    }//GEN-LAST:event_txtCodigoBarrasActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+
+    }//GEN-LAST:event_formKeyReleased
+
+    private void txtCodigoBarrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarrasKeyPressed
+
+        int key = evt.getKeyCode();
+        if (KeyEvent.VK_F2 == key) {
+           new MercadosNLTelaFormaDePagamento().setVisible(true);
+        } else {
+            f2_pressionado = 0;
+        }
+
+    }//GEN-LAST:event_txtCodigoBarrasKeyPressed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    public static void main(String args[]) throws ClassNotFoundException {
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLTelaInicial().setVisible(true);
+                try {
+                    new MercadosNLTelaInicial().setVisible(true);
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -462,7 +554,6 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     private java.awt.Label label3;
     private java.awt.Label label5;
@@ -470,6 +561,11 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     private java.awt.Label label7;
     private java.awt.Label label8;
     private java.awt.Label label9;
+    private javax.swing.JTextField txtCodigoBarras;
     private javax.swing.JLabel txtNome;
+    private javax.swing.JLabel txtNomeProduto;
+    private javax.swing.JLabel txtPreco;
+    private javax.swing.JLabel txtPrecoTotal;
     // End of variables declaration//GEN-END:variables
+
 }
