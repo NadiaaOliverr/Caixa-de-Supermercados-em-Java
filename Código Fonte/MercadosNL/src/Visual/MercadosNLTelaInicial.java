@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -30,12 +31,14 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
-    int f2_pressionado = 0;
     static float soma;
     static int linha_preco;
     static int linha_quantidade;
     static int linha_descricao;
     static int linha_codbarras;
+    static float  pt;
+    
+    
     public MercadosNLTelaInicial() throws ClassNotFoundException {
         initComponents();
         con = ConectaBanco.conectabanco();
@@ -43,6 +46,10 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
     public void recebeDados(String recebe) {
         txtNome.setText(recebe);
+    }
+    public static float TotalCompra()
+    {
+        return pt;
     }
 
     /**
@@ -248,7 +255,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                                 .addComponent(txtNomeProduto)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                                 .addComponent(jLabel12)
                                 .addGap(37, 37, 37))))))
         );
@@ -283,7 +290,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel5.setBackground(new java.awt.Color(53, 53, 57));
@@ -341,7 +348,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
         label3.setText("F2 - Encerrar Venda");
 
-        label5.setText("F1 - Dinheiro");
+        label5.setText("F2 - Cartão");
 
         label6.setText("F1 - Dinheiro");
 
@@ -383,7 +390,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                     .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(27, 25, 32));
@@ -409,21 +416,23 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -435,16 +444,17 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -459,12 +469,10 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     private void txtCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarrasActionPerformed
         //Variáveis:
         boolean vender = true;
-        DecimalFormat df = new DecimalFormat("0.00");
         int quantidade = 0;
         String cb_quatro_caracteres = null;
         String[] valores = null;
         String codigo_barras = null;
-        df.setMaximumFractionDigits(2);
         String sql = null;
         DefaultTableModel tabelaModelo = (DefaultTableModel) TabelaNotinha.getModel();
         
@@ -489,7 +497,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                         String preco = rs.getString("preco");
                         Float preco_prod = Float.parseFloat(preco);
                         quantidade = Integer.parseInt(valores[0]);
-                        float pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma);
+                        pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma);
                         String value = String.format("%1$.02f",pt);
                         soma = soma + preco_prod;
                         float valor_total = quantidade*preco_prod;
@@ -529,10 +537,10 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                         String descricao = txtNomeProduto.getText();
                         String preco = rs.getString("preco");
                         Float preco_prod = Float.parseFloat(preco);
-                        float pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma);
+                        soma = soma + preco_prod;
+                        pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma);
                         String value = String.format("%1$.02f",pt);
                         String value_preco = String.format("%1$.02f",preco_prod);
-                        soma = soma + preco_prod;
                         String codigoB = txtCodigoBarras.getText();
                         
                         txtPrecoTotal.setText(value);
@@ -571,8 +579,11 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         int key = evt.getKeyCode();
         if (KeyEvent.VK_F2 == key) {
            new MercadosNLTelaFormaDePagamento().setVisible(true);
-        } else {
-            f2_pressionado = 0;
+        } else if (KeyEvent.VK_F1 == key){
+           new MercadosNLTelaPagamentoDinhei().setVisible(true);
+        }else if (KeyEvent.VK_F3 == key)
+        {
+            new MercadosNLTelaPagamentoCartao().setVisible(true);
         }
 
     }//GEN-LAST:event_txtCodigoBarrasKeyPressed
@@ -627,5 +638,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel txtPreco;
     private javax.swing.JLabel txtPrecoTotal;
     // End of variables declaration//GEN-END:variables
+
+  
 
 }
