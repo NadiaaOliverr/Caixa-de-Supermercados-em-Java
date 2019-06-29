@@ -28,6 +28,7 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollBar1 = new javax.swing.JScrollBar();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -39,13 +40,16 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
         jPanel1.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 30)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Forma de Pagamento");
 
@@ -70,7 +74,7 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
         jList1.setBackground(new java.awt.Color(240, 240, 240));
         jList1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "    1 - Dinheiro", "    2 - Cartão de Crédito", "    3 - Cartão de Débito" };
+            String[] strings = { "1 - Dinheiro", "2 - Cartão de Crédito", "3 - Cartão de Débito" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -105,7 +109,7 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel3.setBackground(new java.awt.Color(27, 25, 32));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -220,6 +224,7 @@ public class MercadosNLTelaFormaDePagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
