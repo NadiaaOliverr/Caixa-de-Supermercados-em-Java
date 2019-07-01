@@ -5,11 +5,15 @@
  */
 package Visual;
 import Cálculos.TrocoDinheiro;
+import Visual.MercadosNLTelaFormaDePagamento;
 import Visual.MercadosNLTelaInicial;
 import java.awt.Frame;
+import java.awt.Window;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
  *
@@ -17,9 +21,22 @@ import javax.swing.JOptionPane;
  */
 public class MercadosNLTelaPagamentoDinhei extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MercadosNLTelaPagementoDinhei
-     */
+   private MercadosNLTelaFormaDePagamento principal;
+   static int tecla_escD = 0;
+   float troco;
+   
+  // private MercadosNLTelaFormaDePagamento principal1 = new MercadosNLTelaFormaDePagamento();
+   public void MostrarTela(MercadosNLTelaFormaDePagamento tela_principal,boolean mostra)
+   {
+       this.principal = tela_principal;
+       setVisible(mostra);
+   }
+   
+   public void ExecutaMetodo(String recebe)
+   {
+       principal.recebeValorTroco(recebe);
+   }
+   
     public MercadosNLTelaPagamentoDinhei() {
         initComponents();
     }
@@ -40,6 +57,7 @@ public class MercadosNLTelaPagamentoDinhei extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtTroco = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,27 +82,39 @@ public class MercadosNLTelaPagamentoDinhei extends javax.swing.JFrame {
         txtTroco.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         txtTroco.setText("0.00");
 
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtValorPago)
-                        .addGap(6, 6, 6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(57, 57, 57)
-                        .addComponent(txtTroco))
-                    .addComponent(jLabel2))
-                .addGap(27, 27, 27))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtValorPago)
+                                .addGap(6, 6, 6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(57, 57, 57)
+                                .addComponent(txtTroco))
+                            .addComponent(jLabel2))))
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +129,9 @@ public class MercadosNLTelaPagamentoDinhei extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTroco)
                     .addComponent(jLabel3))
-                .addGap(58, 58, 58))
+                .addGap(24, 24, 24)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -125,29 +157,71 @@ public class MercadosNLTelaPagamentoDinhei extends javax.swing.JFrame {
         String valor_passado;
         float valor_total;
         float valor_passadoF;
-        float troco;
+        //float troco;
         
         valor_passado = txtValorPago.getText();
-        valor_total = MercadosNLTelaInicial.TotalCompra();
+        if(MercadosNLTelaFormaDePagamento.passaValorRestante()==0)
+        {
+            valor_total = MercadosNLTelaInicial.TotalCompra();
+        }else{
+            valor_total = MercadosNLTelaFormaDePagamento.passaValorRestante();
+        }
         valor_passadoF = Float.parseFloat(valor_passado);
         troco = TrocoDinheiro.Troco(valor_total,valor_passadoF);
         if(troco<0.00)
         {
-            JOptionPane.showMessageDialog(null, "Está faltando dinheiro");
+           
+            Object[] options = {"Confirmar"};
+            switch (JOptionPane.showOptionDialog(null, "Está faltando dinheiro", "Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0])) {
+            case 0:
+                   ExecutaMetodo(String.valueOf(troco));
+                   this.dispose();
+                break;
+        }
+            
         }else{
-                 txtTroco.setText(String.valueOf(troco));
-                 try {
+                 String value = String.format("%1$.02f",troco);
+                 txtTroco.setText(value);
+                /* try {
            // TimeUnit.SECONDS.sleep(10);
            // this.dispose();
             new MercadosNLTelaInicial().setVisible(true); 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MercadosNLTelaPagamentoDinhei.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         }
-        }
+        
         
                 
         
     }//GEN-LAST:event_txtValorPagoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(txtValorPago.getText().equals("") || troco<0)
+        {
+            JOptionPane.showMessageDialog(null, "Está faltando dinheiro");   
+        }else
+        {
+            this.dispose();
+            principal.dispose();
+             MercadosNLTelaInicial.AtualizaCaixa();
+           // tecla_escD = 1;
+           // System.out.println("tecla esc dinh " + tecla_escD);
+        }
+        
+     
+       /* Fecha todas as janelas
+        System.gc();  
+        for (Window window : Window.getWindows()) {  
+                window.dispose();  
+    
+            }
+       try {
+           new MercadosNLTelaInicial().setVisible(true);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(MercadosNLTelaPagamentoDinhei.class.getName()).log(Level.SEVERE, null, ex);
+       }*/
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +260,7 @@ public class MercadosNLTelaPagamentoDinhei extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

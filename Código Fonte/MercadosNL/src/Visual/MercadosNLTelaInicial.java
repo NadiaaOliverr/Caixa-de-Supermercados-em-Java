@@ -7,6 +7,7 @@ package Visual;
 
 import DAO.ConectaBanco;
 import Cálculos.PrecoTotalCompra;
+import Cálculos.TrocoDinheiro;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -28,28 +29,101 @@ import net.proteanit.sql.DbUtils;
  */
 public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
+    MercadosNLTelaFormaDePagamento enviaPreco = null;
+    MercadosNLTelaPagamentoDinhei pag_dinheiro;
+
     Connection con;
     PreparedStatement pst;
+    PreparedStatement pstCupom;
     ResultSet rs;
+   
+    static int i ;
     static float soma;
     static int linha_preco;
     static int linha_quantidade;
     static int linha_descricao;
     static int linha_codbarras;
-    static float  pt;
-    
+    static float pt;
+    static int atualizou = 0;
+    static int tamanho = 0;
+    static int apertouformadepagamento = 0;
+    public static javax.swing.JTextField teste; // novo
+    static boolean vender = true;
+    static DefaultTableModel tabelaModelo;
+    static String operador;
+    int atualiza_cont;
+    static int id_compra;
     
     public MercadosNLTelaInicial() throws ClassNotFoundException {
         initComponents();
+        txtCodigoBarras.grabFocus();
         con = ConectaBanco.conectabanco();
+        AtualizaContador();
+
+    }
+    public void AtualizaContador()
+    {
+         String sql = "select id_contagem from contagem where id_c = 1";
+         try{
+             pst = con.prepareStatement(sql);
+             rs  = pst.executeQuery();
+             if(rs.next())
+             {
+                 atualiza_cont = rs.getInt("id_contagem");
+                 id_compra = atualiza_cont;
+                 id_compra+=1;
+             }
+             
+         }catch(SQLException error){
+            
+            JOptionPane.showMessageDialog(null,error);
+        }
+    }
+    public void UpdateContador()
+    {
+         String sql = "update contagem set id_contagem = ? where id_c = 1";
+         try{
+             pst = con.prepareStatement(sql);
+             pst.setInt(1,MercadosNLTelaInicial.id_compra);
+             pst.executeUpdate();
+         }catch(SQLException error){
+            
+            JOptionPane.showMessageDialog(null,error);
+        }
     }
 
     public void recebeDados(String recebe) {
         txtNome.setText(recebe);
+        operador = recebe;
     }
-    public static float TotalCompra()
-    {
+
+    public static float TotalCompra() {
         return pt;
+    }
+
+    static void AtualizaCaixa() {
+        
+        txtNomeProduto.setText("Nome do Produto");
+        txtPreco.setText("0.00");
+        txtPrecoTotal.setText("0.00");
+        tamanho = tabelaModelo.getRowCount();
+        id_compra+=1;
+        int j;
+        atualizou = 1;
+        for (j = tamanho - 1; j >= 0; j--) {
+            tabelaModelo.removeRow(j);
+        }
+        tabelaModelo.setRowCount(1);
+        tabelaModelo = (DefaultTableModel) TabelaNotinha.getModel();
+        i = 0;
+        linha_preco = 0;
+        linha_quantidade = 0;
+        linha_descricao = 0;
+        linha_codbarras = 0;
+        soma = 0;
+        vender = true;
+        apertouformadepagamento = 0;
+
     }
 
     /**
@@ -85,16 +159,14 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         txtPrecoTotal = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         label3 = new java.awt.Label();
-        label5 = new java.awt.Label();
-        label6 = new java.awt.Label();
-        label7 = new java.awt.Label();
         label8 = new java.awt.Label();
-        label9 = new java.awt.Label();
+        txtFecharCaixa = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -242,22 +314,21 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel11)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtNomeProduto)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(txtNomeProduto)
-                                .addGap(0, 72, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12)
-                                .addGap(37, 37, 37))))))
+                                .addGap(37, 37, 37))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21))))))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -290,10 +361,9 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
         );
 
         jPanel5.setBackground(new java.awt.Color(53, 53, 57));
@@ -343,7 +413,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -351,15 +421,9 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
         label3.setText("F2 - Encerrar Venda");
 
-        label5.setText("F2 - Cartão");
+        label8.setText("F1 - Pesquisa");
 
-        label6.setText("F1 - Dinheiro");
-
-        label7.setText("F1 - Dinheiro");
-
-        label8.setText("F1 - Dinheiro");
-
-        label9.setText("F1 - Dinheiro");
+        txtFecharCaixa.setText("F3 - Fechar Caixa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -368,31 +432,22 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(txtFecharCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(120, 120, 120)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(151, 151, 151)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1036, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFecharCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -433,8 +488,8 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                                     .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 677, Short.MAX_VALUE)
                                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 677, Short.MAX_VALUE)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -450,8 +505,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(2, 2, 2))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -472,101 +526,142 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
     private void txtCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarrasActionPerformed
         //Variáveis:
-        boolean vender = true;
+        // pag_dinheiro.Mostrar(this);
+        vender = true;
         int quantidade = 0;
         String cb_quatro_caracteres = null;
         String[] valores = null;
         String codigo_barras = null;
         String sql = null;
-        DefaultTableModel tabelaModelo = (DefaultTableModel) TabelaNotinha.getModel();
-        
+
+        tabelaModelo = (DefaultTableModel) TabelaNotinha.getModel();
+        tabelaModelo.setNumRows(200);
+
         while (vender == true) {
+            if(atualizou==1)
+            {
+                UpdateContador();
+                atualizou = 0;
+            }
             codigo_barras = txtCodigoBarras.getText();
             if (codigo_barras.contains("x")) {
                 valores = codigo_barras.split("x");
                 cb_quatro_caracteres = codigo_barras.substring(0, 4);
                 sql = "select * from produto where cod_barras like '"
                         + valores[1] + "'";
+                String sql_cupom = "insert into cupom_nao_fiscal(id_compra,nome_produto,codigo_barras,preco,quantidade,operador_caixa) values(?,?,?,?,?,?)";
+
                 try {
                     pst = con.prepareStatement(sql);
+                    pstCupom = con.prepareStatement(sql_cupom);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    rs = pst.executeQuery();
+                   
+                    if (rs.next()) {
+
+                        txtNomeProduto.setText(rs.getString("nome"));
+                        String descricao = txtNomeProduto.getText();
+                        String preco = rs.getString("preco");
+                        Float preco_prod = Float.parseFloat(preco);
+                        quantidade = Integer.parseInt(valores[0]);
+                        pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod, soma);
+                        String value = String.format("%1$.02f", pt);
+                        soma = soma + preco_prod;
+                        float valor_total = quantidade * preco_prod;
+
+                        String value_unitario = String.format("%1$.02f", preco_prod);
+                        String value_preco = String.format("%1$.02f", valor_total);
+                        txtPrecoTotal.setText(value);
+
+                        txtPreco.setText(value_unitario);
+
+                        txtCodigoBarras.setText("");
+                        tabelaModelo.setValueAt(value_preco, linha_preco, 3);
+                        tabelaModelo.setValueAt(quantidade, linha_quantidade, 2);
+                        tabelaModelo.setValueAt(descricao, linha_descricao, 1);
+                        tabelaModelo.setValueAt(valores[1], linha_codbarras, 0);
+                        
+                        pstCupom.setInt(1,id_compra);
+                        pstCupom.setString(2,descricao);
+                        pstCupom.setString(3,valores[1]);
+                        pstCupom.setFloat(4,valor_total);
+                        pstCupom.setInt(5,quantidade);
+                        pstCupom.setString(6,operador);
+                        pstCupom.execute();
+                        
+                        linha_preco += 1;
+                        linha_quantidade += 1;
+                        linha_descricao += 1;
+                        linha_codbarras += 1;
+                        tabelaModelo.addRow(new Object[]{null, null});
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Este produto não está cadastrado");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                vender = false;
+            } else if (!codigo_barras.contains("x") || codigo_barras.equals("")) {
+                sql = "select * from produto where cod_barras like '"
+                        + txtCodigoBarras.getText() + "'";
+                String sql_cupom = "insert into cupom_nao_fiscal(id_compra,nome_produto,codigo_barras,preco,quantidade,operador_caixa) values(?,?,?,?,?,?)";
+                
+                try {
+                    pst = con.prepareStatement(sql);
+                    pstCupom = con.prepareStatement(sql_cupom);
                 } catch (SQLException ex) {
                     Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
                     rs = pst.executeQuery();
                     if (rs.next()) {
-                        
+
                         txtNomeProduto.setText(rs.getString("nome"));
                         String descricao = txtNomeProduto.getText();
                         String preco = rs.getString("preco");
                         Float preco_prod = Float.parseFloat(preco);
-                        quantidade = Integer.parseInt(valores[0]);
-                        pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma);
-                        String value = String.format("%1$.02f",pt);
                         soma = soma + preco_prod;
-                        float valor_total = quantidade*preco_prod;
-                        String value_preco = String.format("%1$.02f",valor_total);
+                        pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod, soma);
+                        String value = String.format("%1$.02f", pt);
+                        String value_preco = String.format("%1$.02f", preco_prod);
+                        String codigoB = txtCodigoBarras.getText();
+                        String value_unitario = String.format("%1$.02f", preco_prod);
                         txtPrecoTotal.setText(value);
-                        txtPreco.setText(String.valueOf(preco_prod));
+                        txtPreco.setText(value_unitario);
 
                         txtCodigoBarras.setText("");
-                        tabelaModelo.setValueAt(value_preco,linha_preco,3);
-                        tabelaModelo.setValueAt(quantidade,linha_quantidade,2);
-                        tabelaModelo.setValueAt(descricao,linha_descricao,1);
-                        tabelaModelo.setValueAt(valores[1],linha_codbarras,0);
-                        linha_preco+=1;
-                        linha_quantidade+=1;
-                        linha_descricao+=1;
-                        linha_codbarras+=1;
+                        tabelaModelo.setValueAt(value_preco, linha_preco, 3);
+                        tabelaModelo.setValueAt(1, linha_quantidade, 2);
+                        tabelaModelo.setValueAt(descricao, linha_descricao, 1);
+                        tabelaModelo.setValueAt(codigoB, linha_codbarras, 0);
+                        
+                        pstCupom.setInt(1,id_compra);
+                        pstCupom.setString(2,descricao);
+                        pstCupom.setString(3,codigo_barras);
+                        pstCupom.setFloat(4,preco_prod);
+                        pstCupom.setInt(5,1);
+                        pstCupom.setString(6,operador);
+                        pstCupom.execute();
+                        
+                        
+                        linha_preco += 1;
+                        linha_quantidade += 1;
+                        linha_descricao += 1;
+                        linha_codbarras += 1;
                         tabelaModelo.addRow(new Object[]{null, null});
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Este produto não está cadastrado");
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 vender = false;
-            }else if(!codigo_barras.contains("x") || codigo_barras.equals(""))
-            {
-                 sql = "select * from produto where cod_barras like '"
-                            + txtCodigoBarras.getText() + "'";  
-                try {
-                    pst = con.prepareStatement(sql);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    rs = pst.executeQuery();
-                     if (rs.next()) {
-                        
-                        txtNomeProduto.setText(rs.getString("nome"));
-                        String descricao = txtNomeProduto.getText();
-                        String preco = rs.getString("preco");
-                        Float preco_prod = Float.parseFloat(preco);
-                        soma = soma + preco_prod;
-                        pt = PrecoTotalCompra.TotalCompra(quantidade, preco_prod,soma);
-                        String value = String.format("%1$.02f",pt);
-                        String value_preco = String.format("%1$.02f",preco_prod);
-                        String codigoB = txtCodigoBarras.getText();
-                        
-                        txtPrecoTotal.setText(value);
-                        txtPreco.setText(String.valueOf(preco_prod));
-                        
-                        txtCodigoBarras.setText("");
-                        tabelaModelo.setValueAt(value_preco,linha_preco,3);
-                        tabelaModelo.setValueAt(1,linha_quantidade,2);
-                        tabelaModelo.setValueAt(descricao,linha_descricao,1);
-                        tabelaModelo.setValueAt(codigoB,linha_codbarras,0);
-                        linha_preco+=1;
-                        linha_quantidade+=1;
-                        linha_descricao+=1;
-                        linha_codbarras+=1;
-                        tabelaModelo.addRow(new Object[]{null, null});
-                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                vender = false;
-            }else {
-                JOptionPane.showMessageDialog(null, "Este produto não está cadastrado");}
+            } else {
+                JOptionPane.showMessageDialog(null, "Este produto não está cadastrado");
+            }
         }
     }//GEN-LAST:event_txtCodigoBarrasActionPerformed
 
@@ -582,20 +677,87 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
 
         int key = evt.getKeyCode();
         if (KeyEvent.VK_F2 == key) {
-            //do{
-           new MercadosNLTelaFormaDePagamento().setVisible(true);
-            //}while()
-        } else if (KeyEvent.VK_F1 == key){
-           new MercadosNLTelaPagamentoDinhei().setVisible(true);
-        }else if (KeyEvent.VK_F3 == key)
+            apertouformadepagamento = 1;
+            enviaPreco = new MercadosNLTelaFormaDePagamento();
+            enviaPreco.setVisible(true);
+
+            enviaPreco.recebeDados(String.valueOf(pt));
+        } else if (KeyEvent.VK_F1 == key) {
+            try {
+                new MercadosNLTelaPesquisa().setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (KeyEvent.VK_F3 == key) 
         {
-            new MercadosNLTelaPagamentoCartao().setVisible(true);
+            MercadosNLVerificacaoSaida verifica_saida;
+            try {
+                verifica_saida = new MercadosNLVerificacaoSaida(this);
+                 verifica_saida.setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MercadosNLTelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
         }
+        /*else if (KeyEvent.VK_ESCAPE == key && apertouformadepagamento==1) {
+            
+            txtNomeProduto.setText("Nome do Produto");
+            txtPreco.setText("0.00");
+            txtPrecoTotal.setText("0.00");
+            int j;
+            int tamanho = tabelaModelo.getRowCount();
+            System.out.println(tabelaModelo.getRowCount());
+            for(j = tamanho-1; j>=0; j--)
+            {
+                tabelaModelo.removeRow(j);
+            }
+            tabelaModelo.setRowCount(1);
+            tabelaModelo = (DefaultTableModel) TabelaNotinha.getModel();
+            i = 0;
+            linha_preco = 0;
+            linha_quantidade = 0;
+            linha_descricao = 0;
+            linha_codbarras = 0;
+            soma = 0;
+            vender = true;
+            apertouformadepagamento = 0;
+        }else if ( MercadosNLTelaPagamentoDinhei.tecla_escD==1 || MercadosNLTelaPagamentoCartao.tecla_escC==1)
+        {
+            System.out.println("veio aquiiiiinnnn");
+            txtNomeProduto.setText("Nome do Produto");
+            txtPreco.setText("0.00");
+            txtPrecoTotal.setText("0.00");
+            int j;
+            int tamanho = tabelaModelo.getRowCount();
+            System.out.println(tabelaModelo.getRowCount());
+            for(j = tamanho-1; j>=0; j--)
+            {
+                tabelaModelo.removeRow(j);
+            }
+            tabelaModelo.setRowCount(1);
+            tabelaModelo = (DefaultTableModel) TabelaNotinha.getModel();
+            i = 0;
+            linha_preco = 0;
+            linha_quantidade = 0;
+            linha_descricao = 0;
+            linha_codbarras = 0;
+            soma = 0;
+            vender = true;
+            apertouformadepagamento = 0;
+            MercadosNLTelaPagamentoDinhei.tecla_escD=0;
+            MercadosNLTelaPagamentoCartao.tecla_escC=0;
+        }*/
+
 
     }//GEN-LAST:event_txtCodigoBarrasKeyPressed
 
     /**
      * @param args the command line arguments
+     */
+    /**
+     *
+     * @param args the command line arguments
+     * @throws java.lang.ClassNotFoundException
      */
     public static void main(String args[]) throws ClassNotFoundException {
 
@@ -612,7 +774,7 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaNotinha;
+    private static javax.swing.JTable TabelaNotinha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -633,18 +795,13 @@ public class MercadosNLTelaInicial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
     private java.awt.Label label3;
-    private java.awt.Label label5;
-    private java.awt.Label label6;
-    private java.awt.Label label7;
     private java.awt.Label label8;
-    private java.awt.Label label9;
     private javax.swing.JTextField txtCodigoBarras;
+    private java.awt.Label txtFecharCaixa;
     private javax.swing.JLabel txtNome;
-    private javax.swing.JLabel txtNomeProduto;
-    private javax.swing.JLabel txtPreco;
-    private javax.swing.JLabel txtPrecoTotal;
+    private static javax.swing.JLabel txtNomeProduto;
+    private static javax.swing.JLabel txtPreco;
+    private static javax.swing.JLabel txtPrecoTotal;
     // End of variables declaration//GEN-END:variables
-
-  
 
 }

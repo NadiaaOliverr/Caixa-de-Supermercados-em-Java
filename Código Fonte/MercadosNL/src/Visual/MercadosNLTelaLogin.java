@@ -18,6 +18,7 @@ public class MercadosNLTelaLogin extends javax.swing.JFrame {
     PreparedStatement pstCargo = null;
     ResultSet rs = null; //ResultSet é uma interface utilizada pra guardar dados vindos de um banco de dados.
     ResultSet rsCargo = null;
+    static String senha; 
 
     //Construtor
     public MercadosNLTelaLogin() throws ClassNotFoundException {
@@ -66,6 +67,7 @@ public class MercadosNLTelaLogin extends javax.swing.JFrame {
                         
                         if(enviaTexto==null)
                         {
+                            senha = txtSenha.getText();
                             enviaTexto = new MercadosNLTelaInicial();
                             enviaTexto.setVisible(true);
                             enviaTexto.recebeDados(nome_bd);
@@ -74,6 +76,7 @@ public class MercadosNLTelaLogin extends javax.swing.JFrame {
                     } else if (gerente_forma1.equals(cargo_bd) || gerente_forma2.equals(cargo_bd) || gerente_forma3.equals(cargo_bd)){
                         if(enviaTexto==null)
                         {
+                            senha = txtSenha.getText();
                             enviaText = new MercadosNLTelaGerente();
                             enviaText.setVisible(true);
                             enviaText.recebeDados(nome_bd);

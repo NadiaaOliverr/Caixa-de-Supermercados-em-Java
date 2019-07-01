@@ -36,19 +36,19 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
 
     public void listarProdutos() throws ClassNotFoundException {
        
-        String sql = "select * from produto order by id_produto Asc";
+        String sql = "select  id_produto,nome,cod_barras,trunc(preco::numeric,2),marca  from produto order by id_produto Asc";
 
         try {
 
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             tabelaProdutos.setModel(DbUtils.resultSetToTableModel(rs));
-
-            tabelaProdutos.getColumnModel().getColumn(0).setHeaderValue("Código");
+            
+             tabelaProdutos.getColumnModel().getColumn(0).setHeaderValue("Cod Produto");
             tabelaProdutos.getColumnModel().getColumn(1).setHeaderValue("Nome");
             tabelaProdutos.getColumnModel().getColumn(2).setHeaderValue("Código de Barras");
             tabelaProdutos.getColumnModel().getColumn(3).setHeaderValue("Preço");
-            tabelaProdutos.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            tabelaProdutos.getColumnModel().getColumn(4 ).setHeaderValue("Marca");
             tabelaProdutos.getTableHeader().resizeAndRepaint();
             
             
@@ -61,7 +61,7 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
     }
 
     public void pesquisarProdutos() {
-        String sql = "select * from produto where nome like ?";
+        String sql = "select  id_produto, nome,cod_barras,trunc(preco::numeric,2),marca from produto where nome like ?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
             rs = pst.executeQuery();
             tabelaProdutos.setModel(DbUtils.resultSetToTableModel(rs));
             
-            tabelaProdutos.getColumnModel().getColumn(0).setHeaderValue("Código");
+            tabelaProdutos.getColumnModel().getColumn(0).setHeaderValue("Cod Prod");
             tabelaProdutos.getColumnModel().getColumn(1).setHeaderValue("Nome");
             tabelaProdutos.getColumnModel().getColumn(2).setHeaderValue("Código de Barras");
             tabelaProdutos.getColumnModel().getColumn(3).setHeaderValue("Preço");
@@ -146,10 +146,10 @@ public class MercadosNLTelaPesquisarProd extends javax.swing.JFrame {
         tabelaProdutos.setBorder(new javax.swing.border.MatteBorder(null));
         tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Título 1", "Título 2", "Título 3", "Título 4"
+                "Título 1", "Título 2", "Título 3", "Título 4", "Título 5"
             }
         ));
         jScrollPane2.setViewportView(tabelaProdutos);

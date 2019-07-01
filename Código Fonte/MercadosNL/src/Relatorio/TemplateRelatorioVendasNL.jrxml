@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TemplateRelatorioVendasNL" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b420af38-e836-47b9-94e7-dc73e01f6e82">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Titulo" fontName="Arial" fontSize="28" isBold="true" isItalic="true"/>
+	<style name="Coluna" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detalhes" fontName="Arial" fontSize="12"/>
+	<style name="Linha">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 ==0]]></conditionExpression>
+			<style backcolor="#CCCCCC"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[select id_compra, nome_produto,codigo_barras,round(preco::numeric,2),quantidade,operador_caixa from cupom_nao_fiscal;]]>
+	</queryString>
+	<field name="id_compra" class="java.lang.Integer"/>
+	<field name="nome_produto" class="java.lang.String"/>
+	<field name="codigo_barras" class="java.lang.String"/>
+	<field name="round" class="java.math.BigDecimal"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="operador_caixa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="77" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="76" width="555" height="1" uuid="fdd28be5-c42d-4c06-8338-c43fcabe5261"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Titulo" x="102" y="26" width="282" height="39" uuid="289597d8-26ef-453c-9048-35bf64e20e2a"/>
+				<text><![CDATA[Relatório de Vendas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="384" y="10" width="72" height="55" uuid="60f2f1f9-d941-4899-bc9e-d4a53b04eaad"/>
+				<imageExpression><![CDATA["C:\\Users\\Nádia Oliveira\\Desktop\\LogoMercadosNL.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement style="Coluna" x="12" y="2" width="62" height="20" uuid="d22ce797-1558-4c9c-bee6-819901a21f9d"/>
+				<text><![CDATA[ID Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="91" y="2" width="100" height="20" uuid="6c98435d-2b9c-480a-a2cc-819d34e717f1"/>
+				<text><![CDATA[Nome Prod]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="219" y="2" width="100" height="20" uuid="50bcb388-31f7-4374-9620-1fc11f59a468"/>
+				<text><![CDATA[Cod. Barras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="335" y="2" width="62" height="20" uuid="4e7fb0af-12e7-424a-9389-90c1661c0f22"/>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="419" y="2" width="37" height="20" uuid="a72bedd5-328d-4a17-b90d-9934919e82bf"/>
+				<text><![CDATA[Quant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Coluna" x="474" y="2" width="70" height="20" uuid="ddc2c61a-32e9-4381-945e-5203ec82d3aa"/>
+				<text><![CDATA[Operador]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement style="Linha" mode="Opaque" x="0" y="5" width="555" height="23" uuid="203da336-1f51-4e16-97c6-3dc6862c9c45"/>
+			</frame>
+			<textField>
+				<reportElement x="12" y="10" width="62" height="15" uuid="df8ce901-d2a9-4f6f-9196-f5b170fc78ff"/>
+				<textFieldExpression><![CDATA[$F{id_compra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="10" width="100" height="15" uuid="8ae533e9-4799-4b14-95ce-2d3c010ab3c5"/>
+				<textFieldExpression><![CDATA[$F{nome_produto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="10" width="100" height="15" uuid="36268104-f294-4edd-8a9d-ff46c5e97446"/>
+				<textFieldExpression><![CDATA[$F{codigo_barras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="10" width="62" height="15" uuid="b6221284-d47d-460f-860a-1364d72d034e"/>
+				<textFieldExpression><![CDATA[$F{round}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="10" width="37" height="15" uuid="817bbecd-3d9d-4c58-a15d-d905614171b5"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="10" width="70" height="15" uuid="479f2df0-6827-4e21-9207-39f513a74a3d"/>
+				<textFieldExpression><![CDATA[$F{operador_caixa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="39" width="555" height="15" forecolor="#FFFFFF" uuid="a9ee39d8-a114-4aa3-b672-68a64683f07a"/>
+			</rectangle>
+			<textField>
+				<reportElement style="Detalhes" x="533" y="39" width="100" height="15" uuid="c0b67086-5152-4469-b459-44710d9c0605"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Detalhes" x="12" y="39" width="323" height="15" uuid="78711323-ca67-45ac-96c4-b68419da78db"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

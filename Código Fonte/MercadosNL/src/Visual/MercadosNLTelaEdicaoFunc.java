@@ -65,7 +65,6 @@ public class MercadosNLTelaEdicaoFunc extends javax.swing.JFrame {
 
                 if (rs.next()) {
                     nome_bd = rs.getString("nome");
-                    System.out.println(nome_bd);
                     if (enviaTexto == null) {
                         enviaText = new MercadosNLTelaGerente();
                         enviaText.setVisible(true);

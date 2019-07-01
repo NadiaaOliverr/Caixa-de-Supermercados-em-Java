@@ -5,17 +5,35 @@
  */
 package Visual;
 
+import DAO.ConectaBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
 public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MercadosNLVerificacaoSaida
-     */
-    public MercadosNLVerificacaoSaida() {
-        initComponents();
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null; //ResultSet é uma interface utilizada pra guardar dados vindos de um banco de dados.
+    private MercadosNLTelaInicial inicial;
+    
+    public MercadosNLVerificacaoSaida(MercadosNLTelaInicial tela_ini) throws ClassNotFoundException
+    {
+        this.inicial = tela_ini;
+         initComponents();
+        con = ConectaBanco.conectabanco();
+    }
+    
+    public MercadosNLVerificacaoSaida() throws ClassNotFoundException {
+       
     }
 
     /**
@@ -28,7 +46,7 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtSenha = new javax.swing.JPasswordField();
         ButtonConfirmar = new javax.swing.JButton();
         ButtonCancelar = new javax.swing.JButton();
         LabelCredenciais = new javax.swing.JLabel();
@@ -41,6 +59,11 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         ButtonConfirmar.setText("Confirmar");
+        ButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         ButtonCancelar.setText("Cancelar");
         ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,10 +103,8 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LabelCredenciais)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LabelCredenciais)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ButtonConfirmar)
@@ -101,7 +122,7 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(LabelCredenciais)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonConfirmar)
@@ -127,10 +148,42 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
-        new MercadosNLVerificacaoSaida().setVisible(false);
-        System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
+    private void ButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmarActionPerformed
+        try {
+            ConfirmacaoSenha();
+        } catch (SQLException ex) {
+            Logger.getLogger(MercadosNLVerificacaoSaida.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ButtonConfirmarActionPerformed
+    public void UpdateContador()
+    {
+         String sql = "update contagem set id_contagem = ? where id_c = 1";
+         try{
+             pst = con.prepareStatement(sql);
+             pst.setInt(1,MercadosNLTelaInicial.id_compra);
+         }catch(SQLException error){
+            
+            JOptionPane.showMessageDialog(null,error);
+        }
+    }
+    
+    
+    public void ConfirmacaoSenha() throws SQLException
+    {
+        String senha_digitada = MercadosNLTelaLogin.senha;
+        if(txtSenha.getText().equals(senha_digitada))
+        {
+             UpdateContador();
+             this.dispose();
+             inicial.dispose();
+        }else{
+           txtSenha.setText("");
+           JOptionPane.showMessageDialog(null, "Senha inválida!");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -161,7 +214,11 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLVerificacaoSaida().setVisible(true);
+                try {
+                    new MercadosNLVerificacaoSaida().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLVerificacaoSaida.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -173,6 +230,6 @@ public class MercadosNLVerificacaoSaida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

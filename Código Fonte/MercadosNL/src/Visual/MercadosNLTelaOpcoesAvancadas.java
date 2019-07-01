@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,7 +35,6 @@ public class MercadosNLTelaOpcoesAvancadas extends javax.swing.JFrame {
     {
         
         this.id = id_codigo;
-        System.out.println(id);
         txtUsuario.setText(usuario);
         txtSenha.setText(senha);
        

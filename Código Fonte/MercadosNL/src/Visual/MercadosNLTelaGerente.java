@@ -5,8 +5,25 @@
  */
 package Visual;
 
+import DAO.ConectaBanco;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -14,11 +31,16 @@ import java.util.logging.Logger;
  */
 public class MercadosNLTelaGerente extends javax.swing.JFrame {
 
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
     /**
      * Creates new form MercadosNLTelaGerente
      */
-    public MercadosNLTelaGerente() {
+    public MercadosNLTelaGerente() throws ClassNotFoundException {
         initComponents();
+        con = ConectaBanco.conectabanco();
+       
     }
    
     String recebeNome;
@@ -55,6 +77,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNomeGerente = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         MenuArquivo = new javax.swing.JMenu();
         SubMenuVenda = new javax.swing.JMenuItem();
@@ -148,6 +171,11 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         ButtonEmitirRel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/MercadosNLProduto.png"))); // NOI18N
         ButtonEmitirRel.setText("F9 - Emitir Relatório         ");
         ButtonEmitirRel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonEmitirRel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEmitirRelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -224,6 +252,8 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel3.setText("Copyright © 2019 TecCode - Todos os direitos reservados");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -233,7 +263,12 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +279,9 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addContainerGap())))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -425,6 +462,44 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubMenuExibirFuncActionPerformed
 
+    private void ButtonEmitirRelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEmitirRelActionPerformed
+       
+       String sql = "select id_compra, nome_produto,codigo_barras,round(preco::numeric,2),quantidade,operador_caixa from cupom_nao_fiscal";
+         try{
+              pst = con.prepareStatement(sql);
+              rs = pst.executeQuery();
+             JRResultSetDataSource jrRs = new JRResultSetDataSource(rs);
+             //caminho do relatório
+             InputStream caminho_relatorio = this.getClass().getClassLoader().getResourceAsStream("Relatorio/TemplateRelatorioVendasNL.jasper");
+             
+           
+            JasperPrint  jasper_print = JasperFillManager.fillReport(caminho_relatorio,new HashMap(), jrRs);
+           
+           
+            JasperExportManager.exportReportToPdfFile(jasper_print,"C:/RelVendas/VendasSupermercadosNL.pdf");
+          
+             
+             //abrir o pdf automaticamente
+             File file = new File("C:/RelVendas/VendasSupermercadosNL.pdf");
+             try
+             {
+                 Desktop.getDesktop().open(file);
+             }catch(Exception e)
+             {
+                 JOptionPane.showConfirmDialog(null,e);
+             }
+             file.deleteOnExit();
+             
+             
+             
+         }catch (SQLException error) {
+
+            JOptionPane.showMessageDialog(null, error);
+        } catch (JRException ex) {
+            Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ButtonEmitirRelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,7 +530,11 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MercadosNLTelaGerente().setVisible(true);
+                try {
+                    new MercadosNLTelaGerente().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MercadosNLTelaGerente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -478,6 +557,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem SubMenuVenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
