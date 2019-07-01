@@ -81,7 +81,6 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         MenuArquivo = new javax.swing.JMenu();
         SubMenuVenda = new javax.swing.JMenuItem();
-        SubMenuEmitirRelat = new javax.swing.JMenuItem();
         MenuCadastrar = new javax.swing.JMenu();
         SubMenuProd = new javax.swing.JMenuItem();
         SubMenuFunc = new javax.swing.JMenuItem();
@@ -169,7 +168,7 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         });
 
         ButtonEmitirRel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/MercadosNLProduto.png"))); // NOI18N
-        ButtonEmitirRel.setText("F9 - Emitir Relatório         ");
+        ButtonEmitirRel.setText("          Emitir Relatório         ");
         ButtonEmitirRel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ButtonEmitirRel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,15 +296,6 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         });
         MenuArquivo.add(SubMenuVenda);
 
-        SubMenuEmitirRelat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
-        SubMenuEmitirRelat.setText("Emitir Relatório");
-        SubMenuEmitirRelat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubMenuEmitirRelatActionPerformed(evt);
-            }
-        });
-        MenuArquivo.add(SubMenuEmitirRelat);
-
         jMenuBar2.add(MenuArquivo);
 
         MenuCadastrar.setText("Cadastrar");
@@ -426,10 +416,6 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubMenuVendaActionPerformed
 
-    private void SubMenuEmitirRelatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuEmitirRelatActionPerformed
-
-    }//GEN-LAST:event_SubMenuEmitirRelatActionPerformed
-
     private void SubMenuFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenuFuncActionPerformed
         try {
             new MercadosNLTelaCadastroFunc().setVisible(true);
@@ -549,7 +535,6 @@ public class MercadosNLTelaGerente extends javax.swing.JFrame {
     private javax.swing.JMenu MenuArquivo;
     private javax.swing.JMenu MenuCadastrar;
     private javax.swing.JMenu MenuExibir;
-    private javax.swing.JMenuItem SubMenuEmitirRelat;
     private javax.swing.JMenuItem SubMenuExibiProd;
     private javax.swing.JMenuItem SubMenuExibirFunc;
     private javax.swing.JMenuItem SubMenuFunc;
