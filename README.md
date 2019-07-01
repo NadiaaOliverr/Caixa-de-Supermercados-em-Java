@@ -46,7 +46,7 @@
 * Execute a aplicação com o comando <code>Shift+F6</code>
 ### Manual do Usuário
 
-* [Confira o manual de utilização do TecVendas](https://drive.google.com/file/d/1XTKjBtRFGmyvr53wK4u84I9vEmZtLDZU/view?usp=sharing)
+* [Confira o manual de utilização do TecVendas](https://drive.google.com/file/d/1VpcP1OQrmP4C7WswTjf8Xyqu-6D4qKrR/view?usp=sharing)
 
 <!--### Compilando o código-->
 
