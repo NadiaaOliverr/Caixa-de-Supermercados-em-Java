@@ -35,6 +35,8 @@
 
 * Para esta aplicação, foi utilizado o SGBD [Postresql](https://www.postgresql.org/download/) 
 
+* Utilize a biblioteca [iReport](https://community.jaspersoft.com/project/ireport-designer) para geração dos relatórios em pdf
+
 ### Quer compilar o projeto?
 * Clone o repositório com <code>git clone git@github.com:NadiaOliver/Caixa-de-Supermercados-em-Java.git</code>
 * Abra a IDE 
